@@ -57,14 +57,15 @@
     separator: " "
     first: false
 
-# - convert_case:
-#     mapping:
-#       Email_new: uppercase
-
 - convert_case:
-    columns:
-      - Email_new
-    case_type: uppercase
+    mapping:
+      Email_new: uppercase
+      City_new: titlecase
+
+# - convert_case:
+#     columns:
+#       - Email_new
+#     case_type: uppercase
 
 - rename_column:
     mapping:

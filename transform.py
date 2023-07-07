@@ -71,9 +71,12 @@ def map_value_transform(df, column, mapping):
     return df
 
 
-def convert_case_transform(df, columns, case_type):
+def convert_case_transform(df, mapping):
+
+    columns = [column for column in mapping]
     for column in columns:
         if df[column].dtype == 'object':
+            case_type = mapping[column]
             if case_type == 'uppercase':
                 df[column] = df[column].str.upper()
             elif case_type == 'lowercase':
@@ -125,7 +128,8 @@ def apply_transformations(df, transformation_definitions):
         elif transformation_type == 'map_value':
             df = map_value_transform(df, transformation['column'], transformation['mapping'])
         elif transformation_type == 'convert_case':
-            df = convert_case_transform(df, transformation['columns'], transformation['case_type'])
+            # df = convert_case_transform(df, transformation['columns'], transformation['case_type'])
+            df = convert_case_transform(df, transformation['mapping'])
         elif transformation_type == 'copy_columns':
             # df = copy_column_transform(df, transformation['column'], transformation['new_column'])
             df = copy_columns_transform(df, transformation['mapping'])
