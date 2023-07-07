@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Debug program.py",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/program.py",
+      "console": "integratedTerminal",
+      "args": [
+        "input.csv",
+        "output.csv",
+        "transformations.yml",
+        "--encoding",
+        "utf-8"
+      ]
+    }
+  ]
+}

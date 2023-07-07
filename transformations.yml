@@ -1,0 +1,31 @@
+- merge:
+    columns: [Name, Age]
+    output_column: NameAndAge
+- merge:
+    columns: [Email, Phone]
+    separator: ";"
+    output_column: ContactInfo
+- split:
+    column: City
+    delimiter: " "
+- split:
+    column: Category
+    delimiter: "|"
+- convert:
+    - Age
+- filter_records:
+    column: Age
+    operator: ">="
+    value: 25
+- map_values:
+    column: Category_1
+    mapping:
+      Fruits: Fruit
+      Vegetables: Veggie
+- filter_columns:
+    columns: [NameAndAge, ContactInfo, City_1, Category_1]
+- rename:
+    mapping:
+      Email: ContactEmail
+      City_1: City_Shortened
+      Category_1: ProductCategory

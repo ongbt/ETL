@@ -1,0 +1,4 @@
+NameAndAge,ContactInfo,City_Shortened,ProductCategory
+John Doe25,johndoe@example.com;1234567890,New,Fruit
+Jane Smith30,janesmith@example.com;9876543210,San,Veggie
+Bob Anderson35,bobanderson@example.com;9999999999,Los,Meat

@@ -1,0 +1,1 @@
+python3 program.py input.csv output.csv transformations.yml --encoding utf-8
