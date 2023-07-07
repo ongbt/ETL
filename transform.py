@@ -35,10 +35,19 @@ def replace_characters_transform(df, column, num_characters, replacement, first=
     return df
 
 
-def merge_transform(df, column1, column2, output_column=None, separator=' '):
+def merge_transform0(df, column1, column2, output_column=None, separator=' '):
     if output_column is None:
         output_column = column1 + '_' + column2
     df[output_column] = df[column1] + separator + df[column2]
+    return df
+
+def merge_transform(df, columns, output_column=None, separator=' '):
+    merge_columns = [col.strip() for col in columns if col.strip() in df.columns]
+    if output_column is None:
+        output_column =  '_'.join(merge_columns)
+    separator = separator
+    merged_value = df[merge_columns].apply(lambda x: separator.join(x.dropna().astype(str)), axis=1)
+    df[output_column] = merged_value
     return df
 
 
@@ -87,6 +96,10 @@ def sort_transform(df, columns):
 def apply_transformations(df, transformations):
     for transformation in transformations:
         transformation_type = transformation['type']
+
+        # transformation_type = list(transformation.keys())[0]
+        # column_definition = list(transformation.values())[0]
+        
         if transformation_type == 'split':
             df = split_transform(df, transformation['column'], transformation['separator'])
         elif transformation_type == 'split_pair':
@@ -96,7 +109,7 @@ def apply_transformations(df, transformations):
         elif transformation_type == 'replace_characters':
             df = replace_characters_transform(df, transformation['column'], transformation['num_characters'], transformation['replacement'], transformation['first'])
         elif transformation_type == 'merge':
-            df = merge_transform(df, transformation['column1'], transformation['column2'], transformation.get('output_column'), transformation.get('separator'))
+            df = merge_transform(df, transformation['columns'], transformation.get('output_column'), transformation.get('separator'))
         elif transformation_type == 'filter_columns':
             df = filter_columns_transform(df, transformation['columns'])
         elif transformation_type == 'filter_records':
