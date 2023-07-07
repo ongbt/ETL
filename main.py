@@ -4,8 +4,8 @@ import pandas as pd
 
 
 args = parse_arguments()
-transformations = parse_transformations_file(args.transformations_file)
+transformation_definitions = parse_transformations_file(args.transformations_file)
 
 df = pd.read_csv(args.input_file)
-df = apply_transformations(df, transformations)
+df = apply_transformations(df, transformation_definitions)
 df.to_csv(args.output_file, index=False)

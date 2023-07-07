@@ -82,6 +82,8 @@ def convert_case_transform(df, columns, case_type):
                 df[column] = df[column].str.title()
             elif case_type == 'sentencecase':
                 df[column] = df[column].apply(lambda x: x.capitalize())
+            else:
+                print(f"Error: Invalid case '{case_type}' specified for column '{column}'. Using original case.")
     return df
 
 def copy_column_transform(df, column, new_column):
@@ -93,12 +95,12 @@ def sort_transform(df, columns, sort_orders):
     df = df.sort_values(columns, ascending=sort_orders)
     return df
 
-def apply_transformations(df, transformations):
-    for transformation in transformations:
-        transformation_type = transformation['type']
+def apply_transformations(df, transformation_definitions):
+    for transformation_definition in transformation_definitions:
+        # transformation_type = transformation['type']
 
-        # transformation_type = list(transformation.keys())[0]
-        # column_definition = list(transformation.values())[0]
+        transformation_type = list(transformation_definition.keys())[0]
+        transformation = list(transformation_definition.values())[0]
         
         if transformation_type == 'split':
             df = split_transform(df, transformation['column'], transformation['separator'])

@@ -1,70 +1,70 @@
-- type: split
-  column: City
-  separator: " "
+- split:
+    column: City
+    separator: " "
 
-- type: replace
-  column: Phone
-  match_value: "555"
-  replacement: "XXX"
+- replace:
+    column: Phone
+    match_value: "555"
+    replacement: "XXX"
 
-- type: replace_characters
-  column: ZipCode
-  num_characters: 1
-  replacement: "^^"
-  first: true
+- replace_characters:
+    column: ZipCode
+    num_characters: 1
+    replacement: "^^"
+    first: true
 
-- type: replace_characters
-  column: ZipCode
-  num_characters: 2
-  replacement: "*"
-  first: false
+- replace_characters:
+    column: ZipCode
+    num_characters: 2
+    replacement: "*"
+    first: false
 
-- type: merge
-  columns: [Address, City]
-  separator: ", "
-  output_column: "Address and City"
+- merge:
+    columns: [Address, City]
+    separator: ", "
+    output_column: "Address and City"
 
-- type: filter_records
-  condition: "Age >= 30"
+- filter_records:
+    condition: "Age >= 30"
 
-- type: map_value
-  column: City
-  mapping:
-    New York: ny
-    Los Angeles: la
-    Chicago: chi
+- map_value:
+    column: City
+    mapping:
+      New York: ny
+      Los Angeles: la
+      Chicago: chi
 
-- type: split_pair
-  column: Name
-  separator: " "
-  first: false
+- split_pair:
+    column: Name
+    separator: " "
+    first: false
 
-- type: convert_case
-  columns:
-    - Email
-  case_type: uppercase
+- convert_case:
+    columns:
+      - Email
+    case_type: uppercase
 
-- type: rename_column
-  mapping:
-    Name_2: Last_Name
-    Name_1: First_Name
+- rename_column:
+    mapping:
+      Name_2: Last_Name
+      Name_1: First_Name
 
-- type: copy_column
-  column: Last_Name
-  new_column: Last_Name_new
+- copy_column:
+    column: Last_Name
+    new_column: Last_Name_new
 
-- type: sort
-  columns:
-    - Age
-    - First_Name
-  sort_ascending:
-    - false
-    - false
+- sort:
+    columns:
+      - Age
+      - First_Name
+    sort_ascending:
+      - false
+      - false
 
-- type: rename_column
-  mapping:
-    Email: Email Address
-# - type: filter_columns
+- rename_column:
+    mapping:
+      Email: Email Address
+# - filter_columns
 #   columns:
 #     - Name
 #     - Email Address
