@@ -46,6 +46,18 @@
   mapping:
     Name_2: Last_Name
     Name_1: First_Name
+
+- type: copy_column
+  column: Last_Name
+  new_column: Last_Name_new
+
+- type: sort
+  columns:
+    - Age
+    - First_Name
+  ascending:
+    - false
+    - false
 # - type: filter_columns
 #   columns:
 #     - Name

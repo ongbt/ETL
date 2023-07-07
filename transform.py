@@ -73,6 +73,14 @@ def convert_case_transform(df, columns, case_type):
                 df[column] = df[column].apply(lambda x: x[0].upper() + x[1:].lower())
     return df
 
+def copy_column_transform(df, column, new_column):
+    df[new_column] = df[column]
+    return df
+
+
+def sort_transform(df, columns):
+    df = df.sort_values(columns)
+    return df
 
 def apply_transformations(df, transformations):
     for transformation in transformations:
@@ -97,4 +105,8 @@ def apply_transformations(df, transformations):
             df = map_value_transform(df, transformation['column'], transformation['mapping'])
         elif transformation_type == 'convert_case':
             df = convert_case_transform(df, transformation['columns'], transformation['case_type'])
+        elif transformation_type == 'copy_column':
+            df = copy_column_transform(df, transformation['column'], transformation['new_column'])
+        elif transformation_type == 'sort':
+            df = sort_transform(df, transformation['columns'])
     return df
