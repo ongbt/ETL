@@ -1,4 +1,4 @@
-NameAndAge,ContactInfo,City_Shortened,ProductCategory
-John Doe25,johndoe@example.com;1234567890,New,Fruit
-Jane Smith30,janesmith@example.com;9876543210,San,Veggie
-Bob Anderson35,bobanderson@example.com;9999999999,Los,Meat
+Name,Age,ContactEmail,Phone,City,Category,NameAndAge,ContactInfo,City_1,City_2,First_Name,Last_Name,Category_1
+John Marian Smith,25,johndoe@example.com,1234567890,Chicago,Fruits,John Marian Doe25,johndoe@example.com;1234567890,Chicago,,John Marian,Doe,Fruit
+Jane Smith,30,janesmith@example.com,9876543210,San Francisco,Vegetables,Jane Smith30,janesmith@example.com;9876543210,San,Francisco,Jane,Smith,Veggie
+Bob Anderson,35,bobanderson@example.com,9999999999,Los Angeles,Meat,Bob Anderson35,bobanderson@example.com;9999999999,Los,Angeles,Bob,Anderson,Meat

@@ -1,6 +1,7 @@
 import argparse
 import pandas as pd
 import yaml
+import re
 
 
 def transform_merge(df, column_definition):
@@ -49,6 +50,30 @@ def transform_map_values(df, column_definition):
     mapping = column_definition['mapping']
     df[column] = df[column].apply(lambda x: mapping.get(x, x))
 
+
+def transform_replace_value(df, column_definition):
+    column = column_definition['column']
+    pattern = column_definition['pattern']
+    replacement = column_definition['replacement']
+    df.loc[:, column] = df[column].apply(lambda x: re.sub(pattern, replacement, str(x)))
+
+def transform_split_advanced(df, column_definition):
+    split_column = column_definition['column']
+    delimiter = column_definition['delimiter']
+    split_type = column_definition.get('split_type', 'first')
+
+    if split_type == 'first':
+        split_values = df[split_column].str.split(delimiter, n=1, expand=True)
+    elif split_type == 'last':
+        split_values = df[split_column].str.rsplit(delimiter, n=1, expand=True)
+    else:
+        print(f"Error: Invalid split_type '{split_type}' specified for column '{split_column}'. Using 'first' split type.")
+        split_values = df[split_column].str.split(delimiter, n=1, expand=True)
+
+    for i, col in enumerate(split_values.columns):
+        df[f'{split_column}_{i+1}'] = split_values[col]
+
+
 def apply_transformations(df, transformations):
     for transformation in transformations:
         transformation_type = list(transformation.keys())[0]
@@ -68,6 +93,10 @@ def apply_transformations(df, transformations):
             df = transform_filter_records(df, column_definition)
         elif transformation_type == 'map_values':
             transform_map_values(df, column_definition)
+        elif transformation_type == 'replace_value':
+            transform_replace_value(df, column_definition)           
+        elif transformation_type == 'split_advanced':
+            transform_split_advanced(df, column_definition)  
         # Add more transformation types as needed
 
     return df

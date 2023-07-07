@@ -8,6 +8,10 @@
 - split:
     column: City
     delimiter: " "
+- split_advanced:
+    column: Name
+    delimiter: " "
+    split_type: last
 - split:
     column: Category
     delimiter: "|"
@@ -22,10 +26,25 @@
     mapping:
       Fruits: Fruit
       Vegetables: Veggie
-- filter_columns:
-    columns: [NameAndAge, ContactInfo, City_1, Category_1]
+
+- replace_value:
+    column: Name
+    pattern: Doe
+    replacement: Smith
 - rename:
     mapping:
       Email: ContactEmail
-      City_1: City_Shortened
-      Category_1: ProductCategory
+      Name_1: First_Name
+      Name_2: Last_Name
+    #   City_1: City_Shortened
+    #   Category_1: ProductCategory
+# - filter_columns:
+#     columns:
+#       [
+#         Name,
+#         NameAndAge,
+#         ContactInfo,
+#         ContactEmail,
+#         City_Shortened,
+#         ProductCategory,
+#       ]
