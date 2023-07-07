@@ -81,7 +81,7 @@ def convert_case_transform(df, columns, case_type):
             elif case_type == 'titlecase':
                 df[column] = df[column].str.title()
             elif case_type == 'sentencecase':
-                df[column] = df[column].apply(lambda x: x[0].upper() + x[1:].lower())
+                df[column] = df[column].apply(lambda x: x.capitalize())
     return df
 
 def copy_column_transform(df, column, new_column):
@@ -89,8 +89,8 @@ def copy_column_transform(df, column, new_column):
     return df
 
 
-def sort_transform(df, columns):
-    df = df.sort_values(columns)
+def sort_transform(df, columns, sort_orders):
+    df = df.sort_values(columns, ascending=sort_orders)
     return df
 
 def apply_transformations(df, transformations):
@@ -123,5 +123,5 @@ def apply_transformations(df, transformations):
         elif transformation_type == 'copy_column':
             df = copy_column_transform(df, transformation['column'], transformation['new_column'])
         elif transformation_type == 'sort':
-            df = sort_transform(df, transformation['columns'])
+            df = sort_transform(df, transformation['columns'], transformation['sort_ascending'])
     return df

@@ -27,10 +27,6 @@
 - type: filter_records
   condition: "Age >= 30"
 
-- type: rename_column
-  mapping:
-    Email: Email Address
-
 - type: map_value
   column: City
   mapping:
@@ -45,7 +41,7 @@
 
 - type: convert_case
   columns:
-    - City
+    - Email
   case_type: uppercase
 
 - type: rename_column
@@ -61,9 +57,13 @@
   columns:
     - Age
     - First_Name
-  ascending:
+  sort_ascending:
     - false
     - false
+
+- type: rename_column
+  mapping:
+    Email: Email Address
 # - type: filter_columns
 #   columns:
 #     - Name
