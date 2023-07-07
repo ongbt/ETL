@@ -57,6 +57,10 @@
     separator: " "
     first: false
 
+# - convert_case:
+#     mapping:
+#       Email_new: uppercase
+
 - convert_case:
     columns:
       - Email_new
@@ -72,12 +76,17 @@
 #     new_column: Last_Name_new
 
 - sort:
-    columns:
-      - Age
-      - First_Name
-    sort_ascending:
-      - false
-      - false
+    mapping:
+      Age: false
+      First_Name: false
+
+# - sort:
+#     columns:
+#       - Age
+#       - First_Name
+#     sort_ascending:
+#       - false
+#       - false
 
 - rename_column:
     mapping:

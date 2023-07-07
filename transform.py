@@ -93,7 +93,9 @@ def copy_columns_transform(df, mapping):
     return df
 
 
-def sort_transform(df, columns, sort_orders):
+def sort_transform(df, mapping):
+    sort_orders = [mapping[column] for column in mapping]
+    columns = [column for column in mapping]
     df = df.sort_values(columns, ascending=sort_orders)
     return df
 
@@ -128,5 +130,6 @@ def apply_transformations(df, transformation_definitions):
             # df = copy_column_transform(df, transformation['column'], transformation['new_column'])
             df = copy_columns_transform(df, transformation['mapping'])
         elif transformation_type == 'sort':
-            df = sort_transform(df, transformation['columns'], transformation['sort_ascending'])
+            # df = sort_transform(df, transformation['columns'], transformation['sort_ascending'])
+            df = sort_transform(df, transformation['mapping'])
     return df
