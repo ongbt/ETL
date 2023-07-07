@@ -2,18 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: Debug program.py",
+      "name": "Python: Debug main.py",
       "type": "python",
       "request": "launch",
-      "program": "${workspaceFolder}/program.py",
+      "program": "${workspaceFolder}/main.py",
       "console": "integratedTerminal",
-      "args": [
-        "input.csv",
-        "output.csv",
-        "transformations.yml",
-        "--encoding",
-        "utf-8"
-      ]
+      "args": ["input.csv", "output.csv", "transformations.yml"]
     }
   ]
 }

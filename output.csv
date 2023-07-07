@@ -1,4 +1,3 @@
-Name,Age,ContactEmail,Phone,City,Category,NameAndAge,ContactInfo,City_1,City_2,First_Name,Last_Name,Category_1
-John Marian Smith,25,johndoe@example.com,1234567890,CHICAGO,Fruits,John Marian Doe25,johndoe@example.com;1234567890,Chicago,,John Marian,DOE,*ui^
-Jane Smith,30,janesmith@example.com,9876543210,SAN FRANCISCO,Vegetables,Jane Smith30,janesmith@example.com;9876543210,San,Francisco,Jane,SMITH,*ggi^
-Bob Anderson,35,bobanderson@example.com,9999999999,LOS ANGELES,Meat,Bob Anderson35,bobanderson@example.com;9999999999,Los,Angeles,Bob,ANDERSON,*a^
+Name,Age,Email Address,Phone,City,Address,ZipCode,Name_1,Name_2,Address_City
+John Smith,35,john@example.com,1234567890,NY,123 Main St,100**01,John,Smith,"123 Main St, New York"
+Michael Johnson,42,michael@example.com,XXX1234567,CHI,789 Oak St,606**01,Michael,Johnson,"789 Oak St, Chicago"

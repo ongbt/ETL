@@ -1,69 +1,43 @@
-- merge:
-    columns: [Name, Age]
-    output_column: NameAndAge
-- merge:
-    columns: [Email, Phone]
-    separator: ";"
-    output_column: ContactInfo
-- split:
-    column: City
-    delimiter: " "
-- split_advanced:
-    column: Name
-    delimiter: " "
-    split_type: last
-- split:
-    column: Category
-    delimiter: "|"
-- convert:
-    - Age
-- filter_records:
-    column: Age
-    operator: ">="
-    value: 25
-- map_values:
-    column: Category_1
-    mapping:
-      Fruits: Fruit
-      Vegetables: Veggie
+- type: split
+  column: Name
+  separator: " "
 
-- replace_value:
-    column: Name
-    pattern: Doe
-    replacement: Smith
-- rename:
-    mapping:
-      Email: ContactEmail
-      Name_1: First_Name
-      Name_2: Last_Name
+- type: replace
+  column: Phone
+  match_value: "555"
+  replacement: "XXX"
 
-- replace_first_last:
-    column: Category_1
-    replacement: "*"
-    mode: first
-    num_chars: 2
-- replace_first_last:
-    column: Category_1
-    replacement: "^"
-    mode: last
-    num_chars: 1
+- type: replace_characters
+  column: ZipCode
+  num_characters: 2
+  replacement: "**"
+  first: false
 
-- convert_case:
-    columns: [First_Name]
-    case_type: titlecase
-- convert_case:
-    columns: [Last_Name, City]
-    case_type: uppercase
+- type: merge
+  column1: Address
+  column2: City
+  separator: ", "
 
-    #   City_1: City_Shortened
-    #   Category_1: ProductCategory
-# - filter_columns:
-#     columns:
-#       [
-#         Name,
-#         NameAndAge,
-#         ContactInfo,
-#         ContactEmail,
-#         City_Shortened,
-#         ProductCategory,
-#       ]
+- type: filter_records
+  condition: "Age >= 30"
+
+- type: rename_column
+  mapping:
+    Email: Email Address
+
+- type: map_value
+  column: City
+  mapping:
+    New York: NY
+    Los Angeles: LA
+    Chicago: CHI
+
+- type: convert_case
+  columns:
+    - City
+  case_type: uppercase
+# - type: filter_columns
+#   columns:
+#     - Name
+#     - Email Address
+#     - City
