@@ -47,6 +47,14 @@
     replacement: "^"
     mode: last
     num_chars: 1
+
+- convert_case:
+    columns: [First_Name]
+    case_type: titlecase
+- convert_case:
+    columns: [Last_Name, City]
+    case_type: uppercase
+
     #   City_1: City_Shortened
     #   Category_1: ProductCategory
 # - filter_columns:

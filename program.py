@@ -88,6 +88,38 @@ def transform_replace_first_last(df, column_definition):
         print(f"Error: Invalid mode '{mode}' specified for column '{column}'. Using 'first' mode.")
 
 
+def transform_convert_case(df, column_definition):
+    convert_column = column_definition['column']
+    case = column_definition['case']
+
+    if case == 'uppercase':
+        df[convert_column] = df[convert_column].str.upper()
+    elif case == 'lowercase':
+        df[convert_column] = df[convert_column].str.lower()
+    elif case == 'titlecase':
+        df[convert_column] = df[convert_column].str.title()
+    elif case == 'sentencecase':
+        df[convert_column] = df[convert_column].apply(lambda x: x.capitalize())
+    else:
+        print(f"Error: Invalid case '{case}' specified for column '{convert_column}'. Using original case.")
+
+
+def transform_convert_case(df, column_definition):
+    columns = column_definition['columns']
+    case_type = column_definition['case_type']
+
+    for column in columns:
+        if case_type == 'uppercase':
+            df[column] = df[column].str.upper()
+        elif case_type == 'lowercase':
+            df[column] = df[column].str.lower()
+        elif case_type == 'titlecase':
+            df[column] = df[column].str.title()
+        elif case_type == 'sentencecase':
+            df[column] = df[column].apply(lambda x: x[0].upper() + x[1:].lower() if isinstance(x, str) else x)
+        else:
+            print(f"Error: Invalid case type '{case_type}' specified for column '{column}'.")
+
 
 def apply_transformations(df, transformations):
     for transformation in transformations:
@@ -114,6 +146,8 @@ def apply_transformations(df, transformations):
             transform_split_advanced(df, column_definition)  
         elif transformation_type == 'replace_first_last':
             transform_replace_first_last(df, column_definition)
+        elif transformation_type == 'convert_case':
+            transform_convert_case(df, column_definition)
         # Add more transformation types as needed
 
     return df
