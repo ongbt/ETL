@@ -9,8 +9,14 @@
 
 - type: replace_characters
   column: ZipCode
+  num_characters: 1
+  replacement: "^^"
+  first: true
+
+- type: replace_characters
+  column: ZipCode
   num_characters: 2
-  replacement: "**"
+  replacement: "*"
   first: false
 
 - type: merge
@@ -32,6 +38,7 @@
     New York: ny
     Los Angeles: la
     Chicago: chi
+
 - type: split_pair
   column: Name
   separator: " "

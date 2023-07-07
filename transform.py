@@ -27,9 +27,11 @@ def replace_transform(df, column, match_value, replacement):
 def replace_characters_transform(df, column, num_characters, replacement, first=True):
     df[column] = df[column].astype(str)
     if first:
-        df[column] = df[column].str[:num_characters] + replacement + df[column].str[num_characters:]
+        # df[column] = df[column].str[:num_characters] + replacement + df[column].str[num_characters:]
+        df[column] = df[column].apply(lambda x: replacement + x[num_characters:])
     else:
-        df[column] = df[column].str[:-num_characters] + replacement + df[column].str[-num_characters:]
+        # df[column] = df[column].str[:-num_characters] + replacement + df[column].str[-num_characters:]
+        df[column] = df[column].apply(lambda x: x[:-num_characters] + replacement)
     return df
 
 

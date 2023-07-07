@@ -1,4 +1,4 @@
-Name,Age,Email,Phone,City,Address,ZipCode
-John Smith,35,john@example.com,1234567890,New York,123 Main St,10001
-Jane Doe,28,jane@example.com,9876543210,Los Angeles,456 Elm St,90001
-Michael Johnson,42,michael@example.com,5551234567,Chicago,789 Oak St,60601
+Name,Age,Email,Phone,City,Address,ZipCode,Sex
+John Smith,35,john@example.com,1234567890,New York,123 Main St,10001,M
+Jane Doe,28,jane@example.com,9876543210,Los Angeles,456 Elm St,90001,F
+Michael Johnson,42,michael@example.com,5551234567,Chicago,789 Oak St,60601,U
