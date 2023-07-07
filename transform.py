@@ -10,9 +10,12 @@ def split_transform(df, column, separator):
 
 def split_pair_transform(df, column, separator, first=True):
     if first:
-        df[column] = df[column].str.split(separator).str[0]
+        split_values = df[column].str.split(separator, n=1, expand=True)
     else:
-        df[column] = df[column].str.rsplit(separator, n=1).str[-1]
+        split_values = df[column].str.rsplit(separator, n=1, expand=True)
+
+    for i, col in enumerate(split_values.columns):
+        df[f'{column}_{i+1}'] = split_values[col]
     return df
 
 

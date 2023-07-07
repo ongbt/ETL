@@ -1,5 +1,5 @@
 - type: split
-  column: Name
+  column: City
   separator: " "
 
 - type: replace
@@ -17,6 +17,7 @@
   column1: Address
   column2: City
   separator: ", "
+  output_column: "Address and City"
 
 - type: filter_records
   condition: "Age >= 30"
@@ -28,14 +29,23 @@
 - type: map_value
   column: City
   mapping:
-    New York: NY
-    Los Angeles: LA
-    Chicago: CHI
+    New York: ny
+    Los Angeles: la
+    Chicago: chi
+- type: split_pair
+  column: Name
+  separator: " "
+  first: false
 
 - type: convert_case
   columns:
     - City
   case_type: uppercase
+
+- type: rename_column
+  mapping:
+    Name_2: Last_Name
+    Name_1: First_Name
 # - type: filter_columns
 #   columns:
 #     - Name
