@@ -86,8 +86,10 @@ def convert_case_transform(df, columns, case_type):
                 print(f"Error: Invalid case '{case_type}' specified for column '{column}'. Using original case.")
     return df
 
-def copy_column_transform(df, column, new_column):
-    df[new_column] = df[column]
+def copy_columns_transform(df, mapping):
+    for column in mapping:
+        new_column_name = mapping[column]
+        df[new_column_name] = df[column]
     return df
 
 
@@ -122,8 +124,9 @@ def apply_transformations(df, transformation_definitions):
             df = map_value_transform(df, transformation['column'], transformation['mapping'])
         elif transformation_type == 'convert_case':
             df = convert_case_transform(df, transformation['columns'], transformation['case_type'])
-        elif transformation_type == 'copy_column':
-            df = copy_column_transform(df, transformation['column'], transformation['new_column'])
+        elif transformation_type == 'copy_columns':
+            # df = copy_column_transform(df, transformation['column'], transformation['new_column'])
+            df = copy_columns_transform(df, transformation['mapping'])
         elif transformation_type == 'sort':
             df = sort_transform(df, transformation['columns'], transformation['sort_ascending'])
     return df

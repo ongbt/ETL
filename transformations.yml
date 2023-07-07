@@ -1,20 +1,31 @@
+- copy_columns:
+    mapping:
+      Name: Name_new
+      Age: Age_new
+      Email: Email_new
+      Phone: Phone_new
+      City: City_new
+      Address: Address_new
+      ZipCode: ZipCode_new
+      Sex: Sex_new
+
 - split:
     column: City
     separator: " "
 
 - replace:
-    column: Phone
+    column: Phone_new
     match_value: "555"
     replacement: "XXX"
 
 - replace_characters:
-    column: ZipCode
+    column: ZipCode_new
     num_characters: 1
     replacement: "^^"
     first: true
 
 - replace_characters:
-    column: ZipCode
+    column: ZipCode_new
     num_characters: 2
     replacement: "*"
     first: false
@@ -28,11 +39,18 @@
     condition: "Age >= 30"
 
 - map_value:
-    column: City
+    column: City_new
     mapping:
       New York: ny
       Los Angeles: la
       Chicago: chi
+
+- map_value:
+    column: Sex_new
+    mapping:
+      M: Male
+      F: Female
+      U: Unknown
 
 - split_pair:
     column: Name
@@ -41,7 +59,7 @@
 
 - convert_case:
     columns:
-      - Email
+      - Email_new
     case_type: uppercase
 
 - rename_column:
@@ -49,9 +67,9 @@
       Name_2: Last_Name
       Name_1: First_Name
 
-- copy_column:
-    column: Last_Name
-    new_column: Last_Name_new
+# - copy_column:
+#     column: Last_Name
+#     new_column: Last_Name_new
 
 - sort:
     columns:
@@ -63,7 +81,7 @@
 
 - rename_column:
     mapping:
-      Email: Email Address
+      Email_new: Email_new Address
 # - filter_columns
 #   columns:
 #     - Name
