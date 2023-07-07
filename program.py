@@ -73,6 +73,21 @@ def transform_split_advanced(df, column_definition):
     for i, col in enumerate(split_values.columns):
         df[f'{split_column}_{i+1}'] = split_values[col]
 
+ 
+def transform_replace_first_last(df, column_definition):
+    column = column_definition['column']
+    num_chars = column_definition['num_chars']
+    replacement = column_definition['replacement']
+    mode = column_definition.get('mode', 'first')
+
+    if mode == 'first':
+        df[column] = df[column].apply(lambda x: replacement + x[num_chars:])
+    elif mode == 'last':
+        df[column] = df[column].apply(lambda x: x[:-num_chars] + replacement)
+    else:
+        print(f"Error: Invalid mode '{mode}' specified for column '{column}'. Using 'first' mode.")
+
+
 
 def apply_transformations(df, transformations):
     for transformation in transformations:
@@ -97,6 +112,8 @@ def apply_transformations(df, transformations):
             transform_replace_value(df, column_definition)           
         elif transformation_type == 'split_advanced':
             transform_split_advanced(df, column_definition)  
+        elif transformation_type == 'replace_first_last':
+            transform_replace_first_last(df, column_definition)
         # Add more transformation types as needed
 
     return df

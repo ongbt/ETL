@@ -36,6 +36,17 @@
       Email: ContactEmail
       Name_1: First_Name
       Name_2: Last_Name
+
+- replace_first_last:
+    column: Category_1
+    replacement: "*"
+    mode: first
+    num_chars: 2
+- replace_first_last:
+    column: Category_1
+    replacement: "^"
+    mode: last
+    num_chars: 1
     #   City_1: City_Shortened
     #   Category_1: ProductCategory
 # - filter_columns:
