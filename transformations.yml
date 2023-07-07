@@ -18,17 +18,31 @@
     match_value: "555"
     replacement: "XXX"
 
-- replace_characters:
-    column: ZipCode_new
-    num_characters: 1
-    replacement: "^^"
-    first: true
+# - replace_characters:
+#     column: ZipCode_new
+#     num_characters: 1
+#     replacement: "^^"
+#     first: true
 
-- replace_characters:
+- replace_text:
     column: ZipCode_new
-    num_characters: 2
-    replacement: "*"
-    first: false
+    start_position: 1
+    end_position: 2
+    replacement: "^"
+    start: true
+
+- replace_text:
+    column: Phone_new
+    start_position: 1
+    end_position: 2
+    replacement: "^"
+    start: false
+
+# - replace_characters:
+#     column: ZipCode_new
+#     num_characters: 2
+#     replacement: "*"
+#     first: false
 
 - merge:
     columns: [Address, City]
@@ -36,10 +50,11 @@
     output_column: "Address and City"
 
 - filter_records:
-    condition: "Age >= 30"
+    condition: "(Age >= 30) and (City == 'New York')"
 
 - map_value:
     column: City_new
+    default_value: Unknown
     mapping:
       New York: ny
       Los Angeles: la
@@ -47,10 +62,11 @@
 
 - map_value:
     column: Sex_new
+    default_value: Unknown
     mapping:
-      M: Male
       F: Female
-      U: Unknown
+      M: Male
+      O: Others
 
 - split_pair:
     column: Name
@@ -72,14 +88,17 @@
       Name_2: Last_Name
       Name_1: First_Name
 
-# - copy_column:
-#     column: Last_Name
-#     new_column: Last_Name_new
-
 - sort:
     mapping:
       Age: false
       First_Name: false
+
+- rename_column:
+    mapping:
+      Email_new: Email_new Address
+# - copy_column:
+#     column: Last_Name
+#     new_column: Last_Name_new
 
 # - sort:
 #     columns:
@@ -88,10 +107,6 @@
 #     sort_ascending:
 #       - false
 #       - false
-
-- rename_column:
-    mapping:
-      Email_new: Email_new Address
 # - filter_columns
 #   columns:
 #     - Name

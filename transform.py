@@ -24,7 +24,7 @@ def replace_transform(df, column, match_value, replacement):
     return df
 
 
-def replace_characters_transform(df, column, num_characters, replacement, first=True):
+def replace_characters_transform0(df, column, num_characters, replacement, first=True):
     df[column] = df[column].astype(str)
     if first:
         # df[column] = df[column].str[:num_characters] + replacement + df[column].str[num_characters:]
@@ -32,6 +32,33 @@ def replace_characters_transform(df, column, num_characters, replacement, first=
     else:
         # df[column] = df[column].str[:-num_characters] + replacement + df[column].str[-num_characters:]
         df[column] = df[column].apply(lambda x: x[:-num_characters] + replacement)
+    return df
+def replace_text_transform(df, column, start_position, end_position, replacement_character, start=True):
+    df[column] = df[column].astype(str)
+
+    def replace_text(row):
+        text = row[column]
+        length = len(text)
+
+        if start:
+            start_index = start_position
+            end_index = min(end_position + 1, length)
+        else:
+            start_index = max(length - end_position - 1, 0)
+            end_index = max(length - start_position, 0)
+
+        # Check if start_position and end_position are within range
+        if start_index > length or end_index > length or start_index > end_index:
+            raise ValueError(f"Invalid start_position or end_position specified for column '{column}'")
+
+        num_replacements = end_index - start_index
+        replacement_text = replacement_character * num_replacements
+
+        replaced_text = text[:start_index] + replacement_text + text[end_index:]
+        return replaced_text
+
+    df[column] = df.apply(replace_text, axis=1)
+
     return df
 
 
@@ -66,9 +93,12 @@ def rename_columns_transform(df, mapping):
     return df
 
 
-def map_value_transform(df, column, mapping):
+def map_value_transform(df, column, mapping, default_value=None):
     df[column] = df[column].map(mapping)
+    if default_value is not None:
+        df[column].fillna(default_value, inplace=True)
     return df
+
 
 
 def convert_case_transform(df, mapping):
@@ -97,10 +127,24 @@ def copy_columns_transform(df, mapping):
 
 
 def sort_transform(df, mapping):
-    sort_orders = [mapping[column] for column in mapping]
-    columns = [column for column in mapping]
+    columns = [col for col in mapping]
+    sort_orders = [mapping[col] for col in columns]
+
+    # Validate columns in the mapping exist in the DataFrame
+    invalid_columns = [col for col in columns if col not in df.columns]
+    if invalid_columns:
+        raise ValueError(f"Invalid columns specified for sorting: {', '.join(invalid_columns)}")
+
+    # Validate sort orders in the mapping
+    invalid_orders = [order for order in sort_orders if not isinstance(order, bool)]
+    if invalid_orders:
+        raise ValueError(f"Invalid sort orders specified: {', '.join([str(order) for order in invalid_orders])}")
+
+    # Perform the sorting
     df = df.sort_values(columns, ascending=sort_orders)
+
     return df
+
 
 def apply_transformations(df, transformation_definitions):
     for transformation_definition in transformation_definitions:
@@ -115,8 +159,10 @@ def apply_transformations(df, transformation_definitions):
             df = split_pair_transform(df, transformation['column'], transformation['separator'], transformation['first'])
         elif transformation_type == 'replace':
             df = replace_transform(df, transformation['column'], transformation['match_value'], transformation['replacement'])
-        elif transformation_type == 'replace_characters':
-            df = replace_characters_transform(df, transformation['column'], transformation['num_characters'], transformation['replacement'], transformation['first'])
+        # elif transformation_type == 'replace_characters':
+        #     df = replace_characters_transform(df, transformation['column'], transformation['num_characters'], transformation['replacement'], transformation['first'])
+        elif transformation_type == 'replace_text':
+            df = replace_text_transform(df, transformation['column'], transformation['start_position'], transformation['end_position'], transformation['replacement'], transformation['start'])
         elif transformation_type == 'merge':
             df = merge_transform(df, transformation['columns'], transformation.get('output_column'), transformation.get('separator'))
         elif transformation_type == 'filter_columns':
@@ -126,7 +172,7 @@ def apply_transformations(df, transformation_definitions):
         elif transformation_type == 'rename_column':
             df = rename_columns_transform(df, transformation['mapping'])
         elif transformation_type == 'map_value':
-            df = map_value_transform(df, transformation['column'], transformation['mapping'])
+            df = map_value_transform(df, transformation['column'], transformation['mapping'], transformation['default_value'])
         elif transformation_type == 'convert_case':
             # df = convert_case_transform(df, transformation['columns'], transformation['case_type'])
             df = convert_case_transform(df, transformation['mapping'])
