@@ -1,5 +1,4 @@
-# ETL
-
+ 
 
 # Introduction
 ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
@@ -10,6 +9,7 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 # Guide
 ## Transformations
 ### check_data_type
+#### Syntax:
 ```
 - check_data_type:
     mapping:
@@ -17,7 +17,8 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
       ...
 ```
 
-data_type options: object | int64 | datetime64
+#### Parameters:
+- data_type options: object | int64 | datetime64
 #### Example:
 ```
 - check_data_type:
@@ -31,6 +32,7 @@ data_type options: object | int64 | datetime64
 ```
 ---
 ### check_not_blank
+#### Syntax:
 ```
 - check_not_blank:
     columns: [<column_name>, <column_name>, ...]
@@ -42,12 +44,16 @@ data_type options: object | int64 | datetime64
 ```
 ---
 ### copy_columns
+#### Syntax:
 ```
 - copy_columns:
     mapping:
       <column_name>: <new_column_name>
       ...
 ```
+#### Parameters:
+- column_name: column to copy
+- new_column_name: name for the new column 
 #### Example:
 ```
 - copy_columns:
@@ -63,6 +69,7 @@ data_type options: object | int64 | datetime64
 ```
 ---
 ### split
+#### Syntax:
 ```
 - split:
     column: <column_name>
@@ -76,6 +83,7 @@ data_type options: object | int64 | datetime64
 ```
 ---
 ### replace
+#### Syntax:
 ```
 - replace:
     <column_name>: <new_column_name>
@@ -92,16 +100,19 @@ data_type options: object | int64 | datetime64
 ```
 ---
 ### replace_text
+#### Syntax:
 ```
 - replace_text:
     column: <column_name>
     start_position: <start_position>
     end_position: <end_position>
     replacement: <replacement_text>
-    start: <start_from_begining?>
+    start: True | False
 ```
-start_position: zero-based position
-end_position: zero-based position
+#### Parameters:
+- start_position: zero-based position
+- end_position: zero-based position
+- start: start from the begining of the text?
 
 #### Example:
 ```
@@ -115,6 +126,7 @@ end_position: zero-based position
 ```
 ---
 ### merge
+#### Syntax:
 ``` 
 - merge:
     columns: [<column_name>, <column_name>]
@@ -130,11 +142,13 @@ end_position: zero-based position
 ```
 ---
 ### filter_records
+#### Syntax:
 ```
 - filter_records:
     condition: <condition>
 ```
-condition: e.g. "(Age <= 30) and (ZipCode >= 50000)"
+#### Parameters:
+- condition: TODO
 
 #### Example:
 ```
@@ -151,7 +165,8 @@ condition: e.g. "(Age <= 30) and (ZipCode >= 50000)"
       <source_value>: <replacement_value>
       ...
 ```
-
+#### Parameters:
+- default_value: value to be used as the replacement value if no match is found for the source_value
 #### Example:
 ```
 - map_value:
@@ -164,12 +179,16 @@ condition: e.g. "(Age <= 30) and (ZipCode >= 50000)"
 ```
 ---
 ### split_pair
+#### Syntax:
 ```
 - split_pair:
     column: <column_name>
-    separator: <separator>
-    first: <first_occurrence?>
+    separator: <separator_text>
+    first:  True | False
 ```
+#### Parameters:
+- separator: separator text
+- first: spilt at the first occurrence of the separator in the text? If false, it will split at the last occurrence
 #### Example:
 ```
 - split_pair:
@@ -179,13 +198,16 @@ condition: e.g. "(Age <= 30) and (ZipCode >= 50000)"
 ```
 ---
 ### convert_case
+#### Syntax:
 ``` 
 - convert_case:
     mapping:
       <column_name>: <case_type>
       ...
 ```
-case_type: lowercase | uppercase | titlecase | sentencecase
+#### Parameters:
+- column_name: column of which value to convert
+- case_type: lowercase | uppercase | titlecase | sentencecase
 #### Example:
 ```
 - convert_case:
@@ -195,12 +217,16 @@ case_type: lowercase | uppercase | titlecase | sentencecase
 ```
 ---
 ### rename_column
+#### Syntax:
 ```
 - rename_column:
     mapping:
       <column_name>: <new_column_name>
       ...
 ```
+#### Parameters:
+- column_name: current name
+- new_column_name: new name
 #### Example:
 ```
 - rename_column:
@@ -210,12 +236,15 @@ case_type: lowercase | uppercase | titlecase | sentencecase
 ```
 ---
 ### sort
+#### Syntax:
 ```
 - sort:
     mapping:
       <column_name>: <ascending?>
       ... 
 ```
+#### Parameters:
+- ascending: sort ascending for this column_name?
 #### Example:
 ```
 - sort:
