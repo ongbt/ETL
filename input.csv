@@ -1,4 +1,30 @@
 Name,Age,Email,Phone,City,Address,ZipCode,Sex
-John Smith,35,john@example.com,1234567890,New York,123 Main St,10001,X
-Jane Doe,28,jane@example.com,9876543210,Los Angeles,456 Elm St,90001,F
-Michael John Johnson,42,michael@example.com,5551234567,Chicago,789 Oak St,60601,O
+John Doe,30,johndoe@example.com,1234567890,New York,123 Main St,10001,M
+Jane Smith,25,janesmith@example.com,9876543210,Los Angeles,456 Elm St,90001,F
+David Johnson,35,,5555555555,Chicago,789 Oak St,60601,M
+Emily Williams,28,emily@example.com,1111111111,Houston,567 Pine St,77002,F
+Michael Brown,33,michael@example.com,2222222222,Phoenix,901 Cedar St,85001,M
+Emma Lee Thompson,31,emmalee@example.com,3333333333,Boston,345 Maple St,02101,F
+James Davis,29,james@example.com,4444444444,Seattle,567 Walnut St,98101,M
+Olivia Taylor,26,olivia@example.com,5555555555,San Francisco,789 Oak St,94101,F
+William Miller,37,william@example.com,6666666666,Dallas,123 Pine St,75201,M
+Sophia Wilson,27,sophia@example.com,7777777777,Denver,456 Cedar St,80201,F
+Benjamin Anderson,32,benjamin@example.com,8888888888,Austin,789 Elm St,73301,M
+Isabella Brown Martinez,30,isabella@example.com,9999999999,Atlanta,345 Oak St,30301,F
+Joseph Thomas,24,joseph@example.com,1010101010,New York,567 Maple St,10001,M
+Mia Johnson,29,mia@example.com,1212121212,Los Angeles,901 Pine St,90001,F
+Jacob Davis,35,jacob@example.com,1313131313,Chicago,234 Elm St,60601,M
+Abigail Brown Wilson,26,abigail@example.com,1414141414,Houston,567 Cedar St,77002,F
+Ethan Brown,31,ethan@example.com,1515151515,Phoenix,890 Oak St,85001,M
+Elizabeth Taylor,28,elizabeth@example.com,1616161616,Boston,123 Cedar St,02101,F
+Alexander Benjamin Miller,33,alexander@example.com,1717171717,Seattle,456 Pine St,98101,M
+Charlotte Smith,27,charlotte@example.com,1818181818,San Francisco,789 Cedar St,94101,F
+Daniel Thompson,37,daniel@example.com,1919191919,Dallas,345 Oak St,75201,M
+Sofia Anderson,25,sofia@example.com,2020202020,Denver,567 Walnut St,80201,F
+Matthew Martinez,29,matthew@example.com,2121212121,Austin,901 Elm St,73301,M
+Ava Sofia Thomas,32,ava@example.com,2222222222,Atlanta,234 Oak St,30301,F
+Andrew Johnson,30,andreww@example.com,2323232323,New York,456 Maple St,10001,M
+Grace Sofia Davis,26,grace@example.com,2424242424,Los Angeles,789 Pine St,90001,F
+William Wilson,35,,2525252525,Chicago,123 Cedar St,60601,M
+Natalie Brown,28,natalie@example.com,2626262626,Houston,456 Oak St,77002,F
+Ryan Taylor,33,ryan@example.com,2727272727,Phoenix,789 Walnut St,85001,M

@@ -1,3 +1,15 @@
+- check_data_type:
+    mapping:
+      Name: object
+      Age: int64
+      Email: object
+      City: object
+      Address: object
+      Sex: object
+
+- check_not_blank:
+    columns: [Name, Age, Phone, City, Address, ZipCode, Sex]
+
 - copy_columns:
     mapping:
       Name: Name_new
@@ -50,7 +62,7 @@
     output_column: "Address and City"
 
 - filter_records:
-    condition: "(Age >= 30) and (City == 'New York')"
+    condition: "(Age <= 30) and (ZipCode >= 50000)"
 
 - map_value:
     column: City_new
