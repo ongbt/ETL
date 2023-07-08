@@ -88,6 +88,9 @@ This function copies the values from specified columns to new columns with diffe
 ```
 ---
 ### split
+This function splits the values in a specified column into two parts based on a separator and creates new columns with the split values.
+
+
 
 #### Syntax:
 ```
