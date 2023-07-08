@@ -68,9 +68,9 @@
     column: City_new
     default_value: Unknown
     mapping:
-      New York: ny
-      Los Angeles: la
-      Chicago: chi
+      New York: NY
+      Los Angeles: LA
+      Chicago: CHI
 
 - map_value:
     column: Sex_new
@@ -87,8 +87,8 @@
 
 - convert_case:
     mapping:
-      Email_new: uppercase
-      City_new: titlecase
+      Name_1: uppercase
+      Name_2: titlecase
 
 # - convert_case:
 #     columns:
@@ -103,7 +103,7 @@
 - sort:
     mapping:
       Age: false
-      First_Name: false
+      Name: true
 
 - rename_column:
     mapping:
