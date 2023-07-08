@@ -1,12 +1,14 @@
 import pandas as pd
 
 
+ 
 def split_transform(df, column, separator):
     if column not in df.columns:
         raise ValueError(f"Invalid column '{column}' specified for split_transform")
     split_values = df[column].str.split(separator, expand=True)
     for i, col in enumerate(split_values.columns):
-        df.loc[:, f'{column}_{i+1}'] = split_values[col]
+        new_column_name = f'{column}_{i+1}'
+        df.loc[:, new_column_name] = split_values[col]
     return df
 
 
@@ -18,11 +20,10 @@ def split_pair_transform(df, column, separator, first=True):
     else:
         split_values = df[column].str.rsplit(separator, n=1, expand=True)
 
-    for i, col in enumerate(split_values.columns):
-        df.loc[:, f'{column}_{i+1}'] = split_values[col]
+    new_columns = [f'{column}_{i+1}' for i in range(split_values.shape[1])]
+    df = pd.concat([df, split_values.rename(columns=dict(zip(split_values.columns, new_columns)))], axis=1)
     return df
 
- 
 
 
 def replace_transform(df, column, match_value, replacement):
@@ -30,7 +31,6 @@ def replace_transform(df, column, match_value, replacement):
         raise ValueError(f"Invalid column '{column}' specified for replace_transform")
     df[column] = df[column].astype(str).str.replace(match_value, replacement)
     return df
- 
 
 
 def replace_text_transform(df, column, start_position, end_position, replacement_character, start=True):
@@ -38,9 +38,6 @@ def replace_text_transform(df, column, start_position, end_position, replacement
         raise ValueError(f"Invalid column '{column}' specified for replace_text_transform")
     df[column] = df[column].astype(str)
     length = df[column].str.len()
-
-    # if (start_position > length).any() or (end_position > length).any() or (start_position > end_position).any():
-    #     raise ValueError(f"Invalid start_position or end_position specified for column '{column}' in replace_text_transform")
 
     def replace_text(row):
         text = row[column]
@@ -62,14 +59,14 @@ def replace_text_transform(df, column, start_position, end_position, replacement
     df[column] = df.apply(replace_text, axis=1)
 
     return df
- 
+
 
 def merge_transform(df, columns, output_column=None, separator=' '):
     merge_columns = [col.strip() for col in columns if col.strip() in df.columns]
     if not merge_columns:
         raise ValueError("No valid columns specified for merge_transform")
     if output_column is None:
-        output_column =  '_'.join(merge_columns)
+        output_column = '_'.join(merge_columns)
     separator = separator
     merged_value = df[merge_columns].apply(lambda x: separator.join(x.dropna().astype(str)), axis=1)
     df[output_column] = merged_value
@@ -99,34 +96,15 @@ def rename_columns_transform(df, mapping):
     df = df.rename(columns=mapping)
     return df
 
- 
+
 def map_value_transform(df, column, mapping, default_value=None):
     if column not in df.columns:
         raise ValueError(f"Invalid column '{column}' specified for map_value_transform")
     df.loc[:, column] = df[column].map(mapping)
     if default_value is not None:
-        df.loc[:, column].fillna(default_value, inplace=True)
+        df.loc[:, column] = df[column].fillna(default_value)
     return df
 
-
-def convert_case_transform0(df, mapping):
-    columns = [column for column in mapping if column in df.columns]
-    if not columns:
-        raise ValueError("No valid columns specified for convert_case_transform")
-    for column in columns:
-        if df[column].dtype == 'object':
-            case_type = mapping[column]
-            if case_type == 'uppercase':
-                df[column] = df[column].str.upper()
-            elif case_type == 'lowercase':
-                df[column] = df[column].str.lower()
-            elif case_type == 'titlecase':
-                df[column] = df[column].str.title()
-            elif case_type == 'sentencecase':
-                df[column] = df[column].apply(lambda x: x.capitalize())
-            else:
-                raise ValueError(f"Invalid case '{case_type}' specified for column '{column}' in convert_case_transform")
-    return df
 
 def convert_case_transform(df, mapping):
     columns = [column for column in mapping if column in df.columns]
@@ -146,6 +124,7 @@ def convert_case_transform(df, mapping):
             else:
                 raise ValueError(f"Invalid case '{case_type}' specified for column '{column}' in convert_case_transform")
     return df
+
 
 def copy_columns_transform(df, mapping):
     invalid_columns = [col for col in mapping if col not in df.columns]
@@ -169,7 +148,6 @@ def sort_transform(df, mapping):
 
     df = df.sort_values(columns, ascending=sort_orders)
     return df
- 
 
 
 def check_data_type_transform(df, mapping):
@@ -178,11 +156,14 @@ def check_data_type_transform(df, mapping):
         raise ValueError(f"Invalid columns specified for check_data_type_transform: {', '.join(invalid_columns)}")
 
     for column in mapping:
-        expected_data_type  = mapping[column]
+        expected_data_type = mapping[column]
         if df[column].dtype != expected_data_type:
-            raise ValueError(f"Invalid data type in column '{column}'. Expected data type: {expected_data_type}, found: {df[column].dtype}")
+            raise ValueError(
+                f"Invalid data type in column '{column}'. Expected data type: {expected_data_type}, found: {df[column].dtype}"
+            )
 
     return df
+
 
 def check_not_blank_transform(df, columns):
     invalid_columns = [col for col in columns if col not in df.columns]
