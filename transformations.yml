@@ -30,12 +30,6 @@
     match_value: "555"
     replacement: "XXX"
 
-# - replace_characters:
-#     column: ZipCode_new
-#     num_characters: 1
-#     replacement: "^^"
-#     first: true
-
 - replace_text:
     column: ZipCode_new
     start_position: 1
@@ -90,11 +84,6 @@
       Name_1: uppercase
       Name_2: titlecase
 
-# - convert_case:
-#     columns:
-#       - Email_new
-#     case_type: uppercase
-
 - rename_column:
     mapping:
       Name_2: Last_Name
@@ -108,19 +97,3 @@
 - rename_column:
     mapping:
       Email_new: Email_new Address
-# - copy_column:
-#     column: Last_Name
-#     new_column: Last_Name_new
-
-# - sort:
-#     columns:
-#       - Age
-#       - First_Name
-#     sort_ascending:
-#       - false
-#       - false
-# - filter_columns
-#   columns:
-#     - Name
-#     - Email Address
-#     - City
