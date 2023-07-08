@@ -1,14 +1,20 @@
  
 
+This user guide provides an overview of the data transformation program and explains how to use each transformation function. The program is designed to perform various data transformations on a Pandas DataFrame.
 # Introduction
 ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
+
+The data transformation program provides a collection of functions to manipulate and transform data in a Pandas DataFrame. These functions allow you to split, replace, merge, filter, rename, map values, convert case, copy columns, sort, and perform data type and blank value checks.
 
 
 ---
 
 # Guide
-## Transformations
+## Checks
 ### check_data_type
+This function checks the data types of specified columns in the DataFrame.
+
+
 #### Syntax:
 ```
 - check_data_type:
@@ -18,7 +24,8 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 ```
 
 #### Parameters:
-- data_type options: object | int64 | datetime64
+- mapping: dict - The dictionary specifying the column names as keys and the expected data types as values. The data types can be any valid Pandas data types.
+  - data_type options: object | int64 | datetime64
 #### Example:
 ```
 - check_data_type:
@@ -32,18 +39,29 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 ```
 ---
 ### check_not_blank
+This function checks if specified columns have any blank values (NaN or empty strings).
+
+
 #### Syntax:
 ```
 - check_not_blank:
     columns: [<column_name>, <column_name>, ...]
 ```
+#### Parameters:
+- columns: list - The list of column names to check for blank values.
+
 #### Example:
 ```
 - check_not_blank:
     columns: [Name, Age, Phone, City, Address, ZipCode, Sex]
 ```
 ---
+
+## Transformations
 ### copy_columns
+This function copies the values from specified columns to new columns with different names.
+
+
 #### Syntax:
 ```
 - copy_columns:
@@ -52,8 +70,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
       ...
 ```
 #### Parameters:
-- column_name: column to copy
-- new_column_name: name for the new column 
+- mapping: dict - The dictionary specifying the original column names as keys and the new column names as values.
+  - column_name: column to copy
+  - new_column_name: name for the new column 
 #### Example:
 ```
 - copy_columns:
@@ -69,12 +88,16 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 ```
 ---
 ### split
+
 #### Syntax:
 ```
 - split:
     column: <column_name>
     separator: <separator_text>
 ```
+#### Parameters:
+- column: str - The column name to split.
+- separator: str - The separator to split the values.
 #### Example:
 ```
 - split:
@@ -83,6 +106,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 ```
 ---
 ### replace
+This function replaces values in a specified column with a new value.
+
+
 #### Syntax:
 ```
 - replace:
@@ -90,6 +116,10 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
     match_value: <match_value>
     replacement: <replacement_text>
 ``` 
+#### Parameters:
+- column: str - The column name to replace values.
+- match_value: str - The value to match.
+- replacement: str - The new value to replace with.
 #### Example:
 ```
 - replace:
@@ -100,6 +130,7 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 ```
 ---
 ### replace_text
+This function replaces a portion of text in a specified column with a replacement character.
 #### Syntax:
 ```
 - replace_text:
@@ -110,9 +141,11 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
     start: True | False
 ```
 #### Parameters:
-- start_position: zero-based position
-- end_position: zero-based position
-- start: start from the begining of the text?
+- column: str - The column name to replace text.
+- start_position: int - The starting position of the text to replace.
+- end_position: int - The ending position of the text to replace.
+- replacement_character: str - The character to use for replacement.
+- start: bool (optional) - Indicates whether the start position is counted from the beginning or end of the text. Default is True.
 
 #### Example:
 ```
@@ -126,6 +159,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 ```
 ---
 ### merge
+This function merges the values of multiple columns into a single column.
+
+
 #### Syntax:
 ``` 
 - merge:
@@ -133,6 +169,10 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
     separator: <separator_text>
     output_column: <column_name>
 ```
+#### Parameters:
+- columns: list - The list of column names to merge.
+- output_column: str (optional) - The name of the output column. If not provided, the merged column name will be generated.
+- separator: str (optional) - The separator to use between merged values. Default is a space (' ').
 #### Example:
 ```
 - merge:
@@ -141,14 +181,37 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
     output_column: "Address and City"
 ```
 ---
+### filter_columns
+This function filters the DataFrame to include only the specified columns.
+
+
+
+#### Syntax:
+```
+- filter:
+    columns: [<column_name>, <column_name>, ...]
+```
+#### Parameters:
+- columns: list - The list of column names to include in the filtered DataFrame.
+
+#### Example:
+```
+- filter:
+    columns: [Age, Name]
+```
+
+---
 ### filter_records
+This function filters the DataFrame based on a condition.
+
+
 #### Syntax:
 ```
 - filter_records:
     condition: <condition>
 ```
 #### Parameters:
-- condition: TODO
+- condition: The filtering condition written as a string.
 
 #### Example:
 ```
@@ -157,6 +220,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 ```
 ---
 ### map_value
+This function maps the values in a specified column to new values based on a mapping dictionary.
+
+
 ``` 
 - map_value:
     column: <column_name>
@@ -166,7 +232,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
       ...
 ```
 #### Parameters:
-- default_value: value to be used as the replacement value if no match is found for the source_value
+- column: str - The column name to map values.
+- mapping: dict - The dictionary mapping the original values to new values.
+- default_value: Any (optional) - The default value to fill for unmapped values. If not provided, the unmapped values will be filled with NaN.
 #### Example:
 ```
 - map_value:
@@ -179,6 +247,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 ```
 ---
 ### split_pair
+This function splits the values in a specified column into two parts based on a separator and creates new columns with the split values.
+
+ 
 #### Syntax:
 ```
 - split_pair:
@@ -187,8 +258,10 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
     first:  True | False
 ```
 #### Parameters:
-- separator: separator text
-- first: spilt at the first occurrence of the separator in the text? If false, it will split at the last occurrence
+- column: str - The column name to split.
+- separator: str - The separator to split the values.
+- first: bool (optional) - Indicates whether to split from the first occurrence of the separator. Default is True.
+
 #### Example:
 ```
 - split_pair:
@@ -198,6 +271,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 ```
 ---
 ### convert_case
+This function converts the case of values in specified columns.
+
+
 #### Syntax:
 ``` 
 - convert_case:
@@ -206,8 +282,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
       ...
 ```
 #### Parameters:
-- column_name: column of which value to convert
-- case_type: lowercase | uppercase | titlecase | sentencecase
+- mapping: dict - The dictionary specifying the column names and the desired case type. The case types can be 'uppercase', 'lowercase', 'titlecase', or 'sentencecase'.
+  - column_name: column of which value to convert
+  - case_type: lowercase | uppercase | titlecase | sentencecase
 #### Example:
 ```
 - convert_case:
@@ -217,6 +294,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 ```
 ---
 ### rename_column
+This function renames the columns of the DataFrame.
+
+
 #### Syntax:
 ```
 - rename_column:
@@ -225,8 +305,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
       ...
 ```
 #### Parameters:
-- column_name: current name
-- new_column_name: new name
+- mapping: dict - The dictionary specifying the column name mappings.
+  - column_name: current name
+  - new_column_name: new name
 #### Example:
 ```
 - rename_column:
@@ -236,6 +317,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 ```
 ---
 ### sort
+This function sorts the DataFrame based on one or more columns.
+
+
 #### Syntax:
 ```
 - sort:
@@ -244,7 +328,9 @@ ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
       ... 
 ```
 #### Parameters:
-- ascending: sort ascending for this column_name?
+- mapping: dict - The dictionary specifying the column names as keys and the sort orders (True for ascending, False for descending) as values.  
+  - column_name: column to sort
+  - ascending: sort ascending for this column_name?
 #### Example:
 ```
 - sort:
