@@ -208,23 +208,20 @@ This function merges the values of multiple columns into a single column.
     output_column: "Address City ZipCode"
 ```
 ---
-### filter
-This function filters the table to include only the specified columns.
-
-
-
+### drop
+This function drop columns from the table.
 
 #### Syntax:
 ```
-- filter:
+- drop:
     columns: [<column>, <column>, ...]
 ```
 #### Parameters:
-- columns: list - The list of column names to include in the filtered DataFrame.
+- columns: list - The list of column names to be dropped.
 
 #### Example:
 ```
-- filter:
+- drop:
     columns: [Age, Name]
 ```
 

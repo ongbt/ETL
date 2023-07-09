@@ -98,25 +98,36 @@
     mapping:
       Email_new: Email_new Address
 
-- filter:
-    columns:
-      [
-        Name,
-        Age,
-        Email,
-        Phone,
-        City,
-        Address,
-        ZipCode,
-        Sex,
-        Name_new,
-        Age_new,
-        Phone_new,
-        City_new,
-        Address_new,
-        ZipCode_new,
-        Sex_new,
-        City_1,
-        City_2,
-        Address City ZipCode,
-      ]
+- drop:
+    columns: [Email, Phone, City, Address, ZipCode, Sex]
+
+- rename:
+    mapping:
+      Phone_new: Phone
+      City_new: City
+      Address City ZipCode: Address
+      ZipCode_new: ZipCode
+      Sex_new: Sex
+      Email_new: Email
+# - filter:
+#     columns:
+#       [
+#         Name,
+#         Age,
+#         Email,
+#         Phone,
+#         City,
+#         Address,
+#         ZipCode,
+#         Sex,
+#         Name_new,
+#         Age_new,
+#         Phone_new,
+#         City_new,
+#         Address_new,
+#         ZipCode_new,
+#         Sex_new,
+#         City_1,
+#         City_2,
+#         Address City ZipCode,
+#       ]

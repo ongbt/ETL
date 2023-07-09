@@ -30,6 +30,7 @@ def process(input_file, transformation_file, output_file):
         transformation_definitions = parse_transformations_file(transformation_file)
         df = apply_transformations(df, transformation_definitions)
         df.to_csv(output_file, index=False)
+        print(f"Process CSV file '{input_file}' using '{transformation_file}' into '{output_file}' successfully.")
     except (FileNotFoundError, KeyError) as e:
         print(f"Error occurred during split: {str(e)}")
 

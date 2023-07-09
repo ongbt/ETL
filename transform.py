@@ -176,6 +176,13 @@ def check_not_blank_transform(df, columns):
 
     return df
 
+def drop_transform(df, columns):
+    invalid_columns = [col for col in columns if col not in df.columns]
+    if invalid_columns:
+        raise ValueError(f"Invalid columns specified for drop_transform: {', '.join(invalid_columns)}")
+    df.drop(columns=columns, inplace=True)
+    return df
+
 
 def apply_transformations(df, transformation_definitions):
     for transformation_definition in transformation_definitions:
@@ -194,6 +201,8 @@ def apply_transformations(df, transformation_definitions):
             df = merge_transform(df, transformation['columns'], transformation.get('output_column'), transformation.get('separator'))
         elif transformation_type == 'filter':
             df = filter_transform(df, transformation['columns'])
+        elif transformation_type == 'drop':
+            df = drop_transform(df, transformation['columns'])            
         elif transformation_type == 'filter_records':
             df = filter_records_transform(df, transformation['condition'])
         elif transformation_type == 'rename':
