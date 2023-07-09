@@ -73,10 +73,10 @@ def merge_transform(df, columns, output_column=None, separator=' '):
     return df
 
 
-def filter_columns_transform(df, columns):
+def filter_transform(df, columns):
     invalid_columns = [col for col in columns if col not in df.columns]
     if invalid_columns:
-        raise ValueError(f"Invalid columns specified for filter_columns_transform: {', '.join(invalid_columns)}")
+        raise ValueError(f"Invalid columns specified for filter_transform: {', '.join(invalid_columns)}")
     df = df[columns]
     return df
 
@@ -89,10 +89,10 @@ def filter_records_transform(df, condition):
     return df
 
 
-def renames_transform(df, mapping):
+def rename_transform(df, mapping):
     invalid_columns = [col for col in mapping if col not in df.columns]
     if invalid_columns:
-        raise ValueError(f"Invalid columns specified for renames_transform: {', '.join(invalid_columns)}")
+        raise ValueError(f"Invalid columns specified for rename_transform: {', '.join(invalid_columns)}")
     df = df.rename(columns=mapping)
     return df
 
@@ -192,12 +192,12 @@ def apply_transformations(df, transformation_definitions):
             df = replace_text_transform(df, transformation['column'], transformation['start_position'], transformation['end_position'], transformation['replacement'], transformation['start'])
         elif transformation_type == 'merge':
             df = merge_transform(df, transformation['columns'], transformation.get('output_column'), transformation.get('separator'))
-        elif transformation_type == 'filter_columns':
-            df = filter_columns_transform(df, transformation['columns'])
+        elif transformation_type == 'filter':
+            df = filter_transform(df, transformation['columns'])
         elif transformation_type == 'filter_records':
             df = filter_records_transform(df, transformation['condition'])
-        elif transformation_type == 'renames':
-            df = renames_transform(df, transformation['mapping'])
+        elif transformation_type == 'rename':
+            df = rename_transform(df, transformation['mapping'])
         elif transformation_type == 'map_value':
             df = map_value_transform(df, transformation['column'], transformation['mapping'], transformation['default_value'])
         elif transformation_type == 'convert_case':

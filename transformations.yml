@@ -94,6 +94,29 @@
       Age: false
       Name: true
 
-- rename:
+- copy:
     mapping:
       Email_new: Email_new Address
+
+- filter:
+    columns:
+      [
+        Name,
+        Age,
+        Email,
+        Phone,
+        City,
+        Address,
+        ZipCode,
+        Sex,
+        Name_new,
+        Age_new,
+        Phone_new,
+        City_new,
+        Address_new,
+        ZipCode_new,
+        Sex_new,
+        City_1,
+        City_2,
+        Address and City,
+      ]

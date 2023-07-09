@@ -184,7 +184,7 @@ This function merges the values of multiple columns into a single column.
     output_column: "Address and City"
 ```
 ---
-### filter_columns
+### filter
 This function filters the DataFrame to include only the specified columns.
 
 
