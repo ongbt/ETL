@@ -9,7 +9,109 @@ The data transformation program provides a collection of functions to manipulate
 
 ---
 
-# Guide
+# Pipeline
+## Example
+```
+- merge:
+    input_file1: input1.csv
+    input_file2: input2.csv
+    output_file: merged.csv
+    key_column: SSN
+
+- process:
+    input_file: merged.csv
+    transformation_file: transformations.yml
+    output_file: processed.csv
+
+- split:
+    input_file: processed.csv
+    output_definitions:
+      split1.csv: [SSN, Name, Age, Email, ZipCode, Address]
+      split2.csv: [SSN, Name, Phone, Sex]
+
+```
+## Pipeline Definitions
+The Pipeline allows you to perform various transformations on files. It uses the pandas library for data manipulation and a YAML file to define the transformations. This guide will walk you through the usage of the provided functions and demonstrate an example usage.
+
+
+### merge file
+Merges two files based on a common key column.
+
+#### Syntax:
+```
+- merge:
+    input_file1: <input_file1>
+    input_file2: <input_file2>
+    output_file: <output_file>
+    key_column: <key_column>
+```
+#### Parameters::
+- input_file1: Path to the first input file.
+- input_file2: Path to the second input file.
+- output_file: Path to the output merged file.
+- key_column: The common key column used for merging.
+#### Example:
+```
+- merge:
+    input_file1: input1.csv
+    input_file2: input2.csv
+    output_file: merged.csv
+    key_column: SSN
+ 
+```
+---
+### split file
+Splits a file into multiple output files based on specified columns.
+
+#### Syntax:
+```
+- split:
+    input_file: <input_file>
+    output_definitions:
+      <output_file>: [<column>, <column>, ...]
+      <output_file>: [<column>, <column>, ...]
+      ...
+```
+#### Parameters::
+- input_file: Path to the input file.
+- output_definitions: A dictionary where keys are output file paths, and values are lists of columns to include in each output file.
+  - output_file: Path to the output merged file. 
+  - column: list - The list of column names to include in the output file.
+
+#### Example:
+```
+- split:
+    input_file: processed.csv
+    output_definitions:
+      split1.csv: [SSN, Name, Age, Email, ZipCode, Address]
+      split2.csv: [SSN, Name, Phone, Sex]
+```
+---
+### process file
+Processes a file using transformations defined in a YAML file.
+
+#### Syntax:
+``` 
+- process:
+    input_file: <input_file>
+    transformation_file: <transformation_file>
+    output_file:  <output_file> 
+```
+#### Parameters:
+- input_file: Path to the input file.
+- transformation_file: Path to the YAML file containing transformation definitions.
+- output_file: Path to the output processed file.
+
+#### Example:
+```
+- process:
+    input_file: merged.csv
+    transformation_file: transformations.yml
+    output_file: processed.csv
+ 
+```
+---
+# Processing
 ## Checks
 ### check_data_type
 This function checks the data types of specified columns in the DataFrame.
