@@ -213,6 +213,7 @@ This function filters the table to include only the specified columns.
 
 
 
+
 #### Syntax:
 ```
 - filter:
@@ -230,7 +231,7 @@ This function filters the table to include only the specified columns.
 ---
 ### filter_records
 This function filters the DataFrame based on a condition.
-
+See https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.query.html for condition
 
 #### Syntax:
 ```
@@ -334,7 +335,7 @@ This function sorts the DataFrame based on one or more columns.
       ... 
 ```
 #### Parameters:
-- mapping: dict - The dictionary specifying the column names as keys and the sort orders (True for ascending, False for descending) as values.  
+- mapping: dict - The dictionary specifying the column names as keys and the sort orders (True for ascending, False for descending) as values.  You can sort mulitple columns.
   - column: column to sort
   - ascending: sort ascending for this column?
 #### Example:
