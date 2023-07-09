@@ -84,7 +84,7 @@
       Name_1: uppercase
       Name_2: titlecase
 
-- rename_column:
+- rename:
     mapping:
       Name_2: Last_Name
       Name_1: First_Name
@@ -94,6 +94,6 @@
       Age: false
       Name: true
 
-- rename_column:
+- rename:
     mapping:
       Email_new: Email_new Address

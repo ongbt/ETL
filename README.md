@@ -296,13 +296,13 @@ This function converts the case of values in specified columns.
       Name_2: titlecase
 ```
 ---
-### rename_column
+### rename
 This function renames the columns of the DataFrame.
 
 
 #### Syntax:
 ```
-- rename_column:
+- rename:
     mapping:
       <column_name>: <new_column_name>
       ...
@@ -313,7 +313,7 @@ This function renames the columns of the DataFrame.
   - new_column_name: new name
 #### Example:
 ```
-- rename_column:
+- rename:
     mapping:
       Name_2: Last_Name
       Name_1: First_Name

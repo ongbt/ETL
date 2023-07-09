@@ -2,7 +2,7 @@ import unittest
 import numpy as np 
 import pandas as pd
 from transform import split_transform, split_pair_transform, replace_transform, replace_text_transform, \
-    merge_transform, filter_columns_transform, filter_records_transform, rename_columns_transform, \
+    merge_transform, filter_columns_transform, filter_records_transform, renames_transform, \
     map_value_transform, convert_case_transform, copy_columns_transform, sort_transform, check_data_type_transform, \
     check_not_blank_transform
 
@@ -94,14 +94,14 @@ class TestTransformations(unittest.TestCase):
         np.array_equal(transformed_data.values, pd.DataFrame(expected_data).values)
         # self.assertTrue(transformed_data.equals(pd.DataFrame(expected_data)))
 
-    def test_rename_columns_transform(self):
+    def test_renames_transform(self):
         expected_data = {
             'Full Name': ['John Doe', 'Jane Smith', 'Mark Johnson'],
             'Age': [30, 25, 35],
             'Gender': ['M', 'F', 'M'],
             'Email Address': ['john.doe@example.com', 'jane.smith@example.com', 'mark.johnson@example.com']
         }
-        transformed_data = rename_columns_transform(self.sample_data, {'Name': 'Full Name', 'Email': 'Email Address'})
+        transformed_data = renames_transform(self.sample_data, {'Name': 'Full Name', 'Email': 'Email Address'})
         self.assertTrue(transformed_data.equals(pd.DataFrame(expected_data)))
 
     def test_map_value_transform(self):

@@ -89,10 +89,10 @@ def filter_records_transform(df, condition):
     return df
 
 
-def rename_columns_transform(df, mapping):
+def renames_transform(df, mapping):
     invalid_columns = [col for col in mapping if col not in df.columns]
     if invalid_columns:
-        raise ValueError(f"Invalid columns specified for rename_columns_transform: {', '.join(invalid_columns)}")
+        raise ValueError(f"Invalid columns specified for renames_transform: {', '.join(invalid_columns)}")
     df = df.rename(columns=mapping)
     return df
 
@@ -196,8 +196,8 @@ def apply_transformations(df, transformation_definitions):
             df = filter_columns_transform(df, transformation['columns'])
         elif transformation_type == 'filter_records':
             df = filter_records_transform(df, transformation['condition'])
-        elif transformation_type == 'rename_columns':
-            df = rename_columns_transform(df, transformation['mapping'])
+        elif transformation_type == 'renames':
+            df = renames_transform(df, transformation['mapping'])
         elif transformation_type == 'map_value':
             df = map_value_transform(df, transformation['column'], transformation['mapping'], transformation['default_value'])
         elif transformation_type == 'convert_case':
