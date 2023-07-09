@@ -58,13 +58,13 @@ This function checks if specified columns have any blank values (NaN or empty st
 ---
 
 ## Transformations
-### copy_columns
+### duplicate
 This function copies the values from specified columns to new columns with different names.
 
 
 #### Syntax:
 ```
-- copy_columns:
+- duplicate:
     mapping:
       <column_name>: <new_column_name>
       ...
@@ -75,7 +75,7 @@ This function copies the values from specified columns to new columns with diffe
   - new_column_name: name for the new column 
 #### Example:
 ```
-- copy_columns:
+- duplicate:
     mapping:
       Name: Name_new
       Age: Age_new

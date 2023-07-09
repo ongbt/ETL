@@ -126,10 +126,10 @@ def convert_case_transform(df, mapping):
     return df
 
 
-def copy_columns_transform(df, mapping):
+def duplicate_transform(df, mapping):
     invalid_columns = [col for col in mapping if col not in df.columns]
     if invalid_columns:
-        raise ValueError(f"Invalid columns specified for copy_columns_transform: {', '.join(invalid_columns)}")
+        raise ValueError(f"Invalid columns specified for duplicate_transform: {', '.join(invalid_columns)}")
     for column in mapping:
         new_column_name = mapping[column]
         df[new_column_name] = df[column]
@@ -202,8 +202,8 @@ def apply_transformations(df, transformation_definitions):
             df = map_value_transform(df, transformation['column'], transformation['mapping'], transformation['default_value'])
         elif transformation_type == 'convert_case':
             df = convert_case_transform(df, transformation['mapping'])
-        elif transformation_type == 'copy_columns':
-            df = copy_columns_transform(df, transformation['mapping'])
+        elif transformation_type == 'duplicate':
+            df = duplicate_transform(df, transformation['mapping'])
         elif transformation_type == 'sort':
             df = sort_transform(df, transformation['mapping'])
         elif transformation_type == 'check_data_type':

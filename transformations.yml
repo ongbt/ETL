@@ -10,7 +10,7 @@
 - check_not_blank:
     columns: [Name, Age, Phone, City, Address, ZipCode, Sex]
 
-- copy_columns:
+- duplicate:
     mapping:
       Name: Name_new
       Age: Age_new
@@ -94,7 +94,7 @@
       Age: false
       Name: true
 
-- copy:
+- duplicate:
     mapping:
       Email_new: Email_new Address
 

@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from transform import split_transform, split_pair_transform, replace_transform, replace_text_transform, \
     merge_transform, filter_transform, filter_records_transform, rename_transform, \
-    map_value_transform, convert_case_transform, copy_columns_transform, sort_transform, check_data_type_transform, \
+    map_value_transform, convert_case_transform, duplicate_transform, sort_transform, check_data_type_transform, \
     check_not_blank_transform
 
 
@@ -126,7 +126,7 @@ class TestTransformations(unittest.TestCase):
         transformed_data = convert_case_transform(self.sample_data, case_mapping)
         self.assertTrue(transformed_data.equals(pd.DataFrame(expected_data)))
 
-    def test_copy_columns_transform(self):
+    def test_duplicate_transform(self):
         expected_data = {
             'Name': ['John Doe', 'Jane Smith', 'Mark Johnson'],
             'Age': [30, 25, 35],
@@ -134,7 +134,7 @@ class TestTransformations(unittest.TestCase):
             'Email': ['john.doe@example.com', 'jane.smith@example.com', 'mark.johnson@example.com'],
             'Full Name': ['John Doe', 'Jane Smith', 'Mark Johnson']
         }
-        transformed_data = copy_columns_transform(self.sample_data, {'Name': 'Full Name'})
+        transformed_data = duplicate_transform(self.sample_data, {'Name': 'Full Name'})
         self.assertTrue(transformed_data.equals(pd.DataFrame(expected_data)))
 
     def test_sort_transform(self):
