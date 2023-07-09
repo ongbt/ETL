@@ -26,10 +26,10 @@ def split_pair_transform(df, column, separator, first=True):
 
 
 
-def replace_transform(df, column, match_value, replacement):
+def replace_transform(df, column, match, replacement):
     if column not in df.columns:
         raise ValueError(f"Invalid column '{column}' specified for replace_transform")
-    df[column] = df[column].astype(str).str.replace(match_value, replacement)
+    df[column] = df[column].astype(str).str.replace(match, replacement)
     return df
 
 
@@ -187,7 +187,7 @@ def apply_transformations(df, transformation_definitions):
         elif transformation_type == 'split_pair':
             df = split_pair_transform(df, transformation['column'], transformation['separator'], transformation['first'])
         elif transformation_type == 'replace':
-            df = replace_transform(df, transformation['column'], transformation['match_value'], transformation['replacement'])
+            df = replace_transform(df, transformation['column'], transformation['match'], transformation['replacement'])
         elif transformation_type == 'replace_text':
             df = replace_text_transform(df, transformation['column'], transformation['start_position'], transformation['end_position'], transformation['replacement'], transformation['start'])
         elif transformation_type == 'merge':

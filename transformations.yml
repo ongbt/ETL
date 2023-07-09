@@ -27,7 +27,7 @@
 
 - replace:
     column: Phone_new
-    match_value: "555"
+    match: "555"
     replacement: "XXX"
 
 - replace_text:
@@ -37,6 +37,12 @@
     replacement: "^"
     start: true
 
+- replace_characters:
+    column: ZipCode_new
+    num_characters: 2
+    replacement: "*"
+    first: false
+
 - replace_text:
     column: Phone_new
     start_position: 1
@@ -44,16 +50,10 @@
     replacement: "^"
     start: false
 
-# - replace_characters:
-#     column: ZipCode_new
-#     num_characters: 2
-#     replacement: "*"
-#     first: false
-
 - merge:
-    columns: [Address, City]
+    columns: [Address, City, ZipCode]
     separator: ", "
-    output_column: "Address and City"
+    output_column: "Address City ZipCode"
 
 - filter_records:
     condition: "(Age <= 30) and (ZipCode >= 50000)"
@@ -118,5 +118,5 @@
         Sex_new,
         City_1,
         City_2,
-        Address and City,
+        Address City ZipCode,
       ]

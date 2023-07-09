@@ -19,7 +19,7 @@ This function checks the data types of specified columns in the DataFrame.
 ```
 - check_data_type:
     mapping:
-      <column_name>: <data_type>
+      <column>: <data_type>
       ...
 ```
 
@@ -45,7 +45,7 @@ This function checks if specified columns have any blank values (NaN or empty st
 #### Syntax:
 ```
 - check_not_blank:
-    columns: [<column_name>, <column_name>, ...]
+    columns: [<column>, <column>, ...]
 ```
 #### Parameters:
 - columns: list - The list of column names to check for blank values.
@@ -66,12 +66,12 @@ This function copies the values from specified columns to new columns with diffe
 ```
 - duplicate:
     mapping:
-      <column_name>: <new_column_name>
+      <column>: <new_column_name>
       ...
 ```
 #### Parameters:
 - mapping: dict - The dictionary specifying the original column names as keys and the new column names as values.
-  - column_name: column to copy
+  - column: column to copy
   - new_column_name: name for the new column 
 #### Example:
 ```
@@ -88,24 +88,48 @@ This function copies the values from specified columns to new columns with diffe
 ```
 ---
 ### split
-This function splits the values in a specified column into two parts based on a separator and creates new columns with the split values.
+This function splits the values in a specified column into mulitple parts based on a separator and creates new columns with the split values. Each new column created will be named '{column}_{index}'.
 
 
 
 #### Syntax:
 ```
 - split:
-    column: <column_name>
+    column: <column>
     separator: <separator_text>
 ```
 #### Parameters:
-- column: str - The column name to split.
+- column: str - The column name to split. Muliple columns may be created.
 - separator: str - The separator to split the values.
 #### Example:
 ```
 - split:
     column: City
     separator: " "
+```
+---
+### split_pair
+This function splits the values in a specified column into two parts based on a separator and creates new columns with the split values.
+
+ 
+#### Syntax:
+```
+- split_pair:
+    column: <column>
+    separator: <separator_text>
+    first:  True | False
+```
+#### Parameters:
+- column: str - The column name to split. At most 2 columns will be created.
+- separator: str - The separator to split the values.
+- first: bool (optional) - Indicates whether to split from the first occurrence of the separator. Default is True.
+
+#### Example:
+```
+- split_pair:
+    column: Name
+    separator: " "
+    first: false
 ```
 ---
 ### replace
@@ -115,19 +139,19 @@ This function replaces values in a specified column with a new value.
 #### Syntax:
 ```
 - replace:
-    <column_name>: <new_column_name>
-    match_value: <match_value>
-    replacement: <replacement_text>
+    column: <column>
+    match: <match>
+    replacement: <replacement_value>
 ``` 
 #### Parameters:
 - column: str - The column name to replace values.
-- match_value: str - The value to match.
+- match: str - The value to match.
 - replacement: str - The new value to replace with.
 #### Example:
 ```
 - replace:
     column: Phone_new
-    match_value: "555"
+    match: "555"
     replacement: "XXX"
 
 ```
@@ -137,7 +161,7 @@ This function replaces a portion of text in a specified column with a replacemen
 #### Syntax:
 ```
 - replace_text:
-    column: <column_name>
+    column: <column>
     start_position: <start_position>
     end_position: <end_position>
     replacement: <replacement_text>
@@ -147,7 +171,7 @@ This function replaces a portion of text in a specified column with a replacemen
 - column: str - The column name to replace text.
 - start_position: int - The starting position of the text to replace.
 - end_position: int - The ending position of the text to replace.
-- replacement_character: str - The character to use for replacement.
+- replacement: str - The character to use for replacement.
 - start: bool (optional) - Indicates whether the start position is counted from the beginning or end of the text. Default is True.
 
 #### Example:
@@ -168,31 +192,31 @@ This function merges the values of multiple columns into a single column.
 #### Syntax:
 ``` 
 - merge:
-    columns: [<column_name>, <column_name>]
+    columns: [<column>, <column>, ...]
     separator: <separator_text>
-    output_column: <column_name>
+    output_column: <new_column_name>
 ```
 #### Parameters:
-- columns: list - The list of column names to merge.
+- columns: list - The list of column names to merge. You can merge multiple columns.
 - output_column: str (optional) - The name of the output column. If not provided, the merged column name will be generated.
 - separator: str (optional) - The separator to use between merged values. Default is a space (' ').
 #### Example:
 ```
 - merge:
-    columns: [Address, City]
+    columns: [Address, City, ZipCode]
     separator: ", "
-    output_column: "Address and City"
+    output_column: "Address City ZipCode"
 ```
 ---
 ### filter
-This function filters the DataFrame to include only the specified columns.
+This function filters the table to include only the specified columns.
 
 
 
 #### Syntax:
 ```
 - filter:
-    columns: [<column_name>, <column_name>, ...]
+    columns: [<column>, <column>, ...]
 ```
 #### Parameters:
 - columns: list - The list of column names to include in the filtered DataFrame.
@@ -228,16 +252,18 @@ This function maps the values in a specified column to new values based on a map
 
 ``` 
 - map_value:
-    column: <column_name>
+    column: <column>
     default_value: <default_value>
     mapping:
-      <source_value>: <replacement_value>
+      <match>: <replacement>
       ...
 ```
 #### Parameters:
 - column: str - The column name to map values.
-- mapping: dict - The dictionary mapping the original values to new values.
 - default_value: Any (optional) - The default value to fill for unmapped values. If not provided, the unmapped values will be filled with NaN.
+- mapping: dict - The dictionary mapping the original values to new values.
+  - match: str - The value to match.
+  - replacement: str - The new value to replace with.
 #### Example:
 ```
 - map_value:
@@ -249,30 +275,7 @@ This function maps the values in a specified column to new values based on a map
       Chicago: CHI
 ```
 ---
-### split_pair
-This function splits the values in a specified column into two parts based on a separator and creates new columns with the split values.
 
- 
-#### Syntax:
-```
-- split_pair:
-    column: <column_name>
-    separator: <separator_text>
-    first:  True | False
-```
-#### Parameters:
-- column: str - The column name to split.
-- separator: str - The separator to split the values.
-- first: bool (optional) - Indicates whether to split from the first occurrence of the separator. Default is True.
-
-#### Example:
-```
-- split_pair:
-    column: Name
-    separator: " "
-    first: false
-```
----
 ### convert_case
 This function converts the case of values in specified columns.
 
@@ -281,12 +284,12 @@ This function converts the case of values in specified columns.
 ``` 
 - convert_case:
     mapping:
-      <column_name>: <case_type>
+      <column>: <case_type>
       ...
 ```
 #### Parameters:
 - mapping: dict - The dictionary specifying the column names and the desired case type. The case types can be 'uppercase', 'lowercase', 'titlecase', or 'sentencecase'.
-  - column_name: column of which value to convert
+  - column: column of which value to convert
   - case_type: lowercase | uppercase | titlecase | sentencecase
 #### Example:
 ```
@@ -304,12 +307,12 @@ This function renames the columns of the DataFrame.
 ```
 - rename:
     mapping:
-      <column_name>: <new_column_name>
+      <column>: <new_column_name>
       ...
 ```
 #### Parameters:
 - mapping: dict - The dictionary specifying the column name mappings.
-  - column_name: current name
+  - column: current name
   - new_column_name: new name
 #### Example:
 ```
@@ -327,13 +330,13 @@ This function sorts the DataFrame based on one or more columns.
 ```
 - sort:
     mapping:
-      <column_name>: <ascending?>
+      <column>: <ascending?>
       ... 
 ```
 #### Parameters:
 - mapping: dict - The dictionary specifying the column names as keys and the sort orders (True for ascending, False for descending) as values.  
-  - column_name: column to sort
-  - ascending: sort ascending for this column_name?
+  - column: column to sort
+  - ascending: sort ascending for this column?
 #### Example:
 ```
 - sort:
