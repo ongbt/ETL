@@ -16,6 +16,14 @@
       "program": "${workspaceFolder}/main.py",
       "console": "integratedTerminal",
       "args": ["input.csv", "output.csv", "transformations.yml"]
+    },
+    {
+      "name": "Python: Debug pipeline_main.py",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/pipeline_main.py",
+      "console": "integratedTerminal",
+      "args": ["pipeline.yml"]
     }
   ]
 }

@@ -1,0 +1,29 @@
+SSN,Name,Age,Email,Phone,Sex
+9876543210,Jane Smith,25,janesmith@example.com,9876543210,F
+5555555551,David Johnson,35,,5555555555,M
+1111111111,Emily Williams,28,emily@example.com,1111111111,F
+2222222222,Michael Brown,33,michael@example.com,2222222222,M
+3333333333,Emma Lee Thompson,31,emmalee@example.com,3333333333,F
+4444444444,James Davis,29,james@example.com,4444444444,M
+5555555555,Olivia Taylor,26,olivia@example.com,5555555555,F
+6666666666,William Miller,37,william@example.com,6666666666,M
+7777777777,Sophia Wilson,27,sophia@example.com,7777777777,F
+8888888888,Benjamin Anderson,32,benjamin@example.com,8888888888,M
+9999999999,Isabella Brown Martinez,30,isabella@example.com,9999999999,F
+1010101010,Joseph Thomas,24,joseph@example.com,1010101010,M
+1212121212,Mia Johnson,29,mia@example.com,1212121212,F
+1313131313,Jacob Davis,35,jacob@example.com,1313131313,M
+1414141414,Abigail Brown Wilson,26,abigail@example.com,1414141414,F
+1515151515,Ethan Brown,31,ethan@example.com,1515151515,M
+1616161616,Elizabeth Taylor,28,elizabeth@example.com,1616161616,F
+1717171717,Alexander Benjamin Miller,33,alexander@example.com,1717171717,M
+1818181818,Charlotte Smith,27,charlotte@example.com,1818181818,F
+1919191919,Daniel Thompson,37,daniel@example.com,1919191919,M
+2020202020,Sofia Anderson,25,sofia@example.com,2020202020,F
+2121212121,Matthew Martinez,29,matthew@example.com,2121212121,M
+2222222222,Ava Sofia Thomas,32,ava@example.com,2222222222,F
+2323232323,Andrew Johnson,30,andreww@example.com,2323232323,M
+2424242424,Grace Sofia Davis,26,grace@example.com,2424242424,F
+2525252525,William Wilson,35,,2525252525,M
+2626262626,Natalie Brown,28,natalie@example.com,2626262626,F
+2727272727,Ryan Taylor,33,ryan@example.com,2727272727,M

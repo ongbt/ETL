@@ -1,0 +1,16 @@
+- merge:
+    input_file1: input1.csv
+    input_file2: input2.csv
+    output_file: merged.csv
+    key_column: SSN
+
+- split:
+    input_file: input1.csv
+    output_definitions:
+      split1.csv: [SSN, Name, Age, Email]
+      split2.csv: [SSN, Name, Phone, Sex]
+
+- process:
+    input_file: input.csv
+    transformation_file: transformations.yml
+    output_file: final.csv
