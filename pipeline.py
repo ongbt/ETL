@@ -1,7 +1,7 @@
 import pandas as pd
 import yaml
 from transform import apply_transformations
-from parse_arguments import parse_arguments, parse_transformations_file
+from parse_transformations_file import parse_transformations_file
 
 
 def merge(input_file1, input_file2, output_file, key_column):

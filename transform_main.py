@@ -1,6 +1,7 @@
+from transform import apply_transformations
+from parse_transformations_file import parse_transformations_file
+import pandas as pd
 import argparse
-import yaml
-
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Transform input CSV file based on transformation definitions.')
@@ -10,8 +11,9 @@ def parse_arguments():
     args = parser.parse_args()
     return args
 
+args = parse_arguments()
+transformation_definitions = parse_transformations_file(args.transformations_file)
 
-def parse_transformations_file(transformations_file):
-    with open(transformations_file, 'r') as file:
-        transformations = yaml.safe_load(file)
-    return transformations
+df = pd.read_csv(args.input_file)
+df = apply_transformations(df, transformation_definitions)
+df.to_csv(args.output_file, index=False)

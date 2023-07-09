@@ -1,5 +1,5 @@
 from pipeline import run_pipeline
-from parse_arguments import parse_arguments, parse_transformations_file
+from parse_transformations_file import parse_transformations_file
 import argparse
 import yaml 
 
