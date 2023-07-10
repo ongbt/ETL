@@ -10,6 +10,23 @@
 - check_not_blank:
     columns: [Name, Age, Phone, City, Address, ZipCode, Sex]
 
+- checks:
+    - type: length
+      column: Name
+      max_length: 100
+    - type: values
+      column: Sex
+      valid_values:
+        - M
+        - F
+    - type: not_blank
+      columns:
+        - Name
+    - type: range
+      column: Age
+      min_value: 18
+      max_value: 39
+
 - duplicate:
     mapping:
       Name: Name_new

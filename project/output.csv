@@ -1,13 +1,13 @@
-Name,Age,Email,Phone,City,Address,ZipCode,Sex,Name_new,Age_new,Phone_new,City_new,Address_new,ZipCode_new,Sex_new,City_1,City_2,Address City ZipCode
-James Davis,29,james@example.com,4444444444,Seattle,567 Walnut St,98101,M,James Davis,29,4444444^^4,Unknown,567 Walnut St,9^^01,Male,Seattle,,"567 Walnut St, Seattle, 98101"
-Matthew Martinez,29,matthew@example.com,2121212121,Austin,901 Elm St,73301,M,Matthew Martinez,29,2121212^^1,Unknown,901 Elm St,7^^01,Male,Austin,,"901 Elm St, Austin, 73301"
-Mia Johnson,29,mia@example.com,1212121212,Los Angeles,901 Pine St,90001,F,Mia Johnson,29,1212121^^2,LA,901 Pine St,9^^01,Female,Los,Angeles,"901 Pine St, Los Angeles, 90001"
-Emily Williams,28,emily@example.com,1111111111,Houston,567 Pine St,77002,F,Emily Williams,28,1111111^^1,Unknown,567 Pine St,7^^02,Female,Houston,,"567 Pine St, Houston, 77002"
-Natalie Brown,28,natalie@example.com,2626262626,Houston,456 Oak St,77002,F,Natalie Brown,28,2626262^^6,Unknown,456 Oak St,7^^02,Female,Houston,,"456 Oak St, Houston, 77002"
-Charlotte Smith,27,charlotte@example.com,1818181818,San Francisco,789 Cedar St,94101,F,Charlotte Smith,27,1818181^^8,Unknown,789 Cedar St,9^^01,Female,San,Francisco,"789 Cedar St, San Francisco, 94101"
-Sophia Wilson,27,sophia@example.com,7777777777,Denver,456 Cedar St,80201,F,Sophia Wilson,27,7777777^^7,Unknown,456 Cedar St,8^^01,Female,Denver,,"456 Cedar St, Denver, 80201"
-Abigail Brown Wilson,26,abigail@example.com,1414141414,Houston,567 Cedar St,77002,F,Abigail Brown Wilson,26,1414141^^4,Unknown,567 Cedar St,7^^02,Female,Houston,,"567 Cedar St, Houston, 77002"
-Grace Sofia Davis,26,grace@example.com,2424242424,Los Angeles,789 Pine St,90001,F,Grace Sofia Davis,26,2424242^^4,LA,789 Pine St,9^^01,Female,Los,Angeles,"789 Pine St, Los Angeles, 90001"
-Olivia Taylor,26,olivia@example.com,5555555555,San Francisco,789 Oak St,94101,F,Olivia Taylor,26,XXXXXXX^^5,Unknown,789 Oak St,9^^01,Female,San,Francisco,"789 Oak St, San Francisco, 94101"
-Jane Smith,25,janesmith@example.com,9876543210,Los Angeles,456 Elm St,90001,F,Jane Smith,25,9876543^^0,LA,456 Elm St,9^^01,Female,Los,Angeles,"456 Elm St, Los Angeles, 90001"
-Sofia Anderson,25,sofia@example.com,2020202020,Denver,567 Walnut St,80201,F,Sofia Anderson,25,2020202^^0,Unknown,567 Walnut St,8^^01,Female,Denver,,"567 Walnut St, Denver, 80201"
+SSN,Name,Age,Name_new,Age_new,Email,Phone,City,Address_new,ZipCode,Sex,City_1,City_2,Address,First_Name,Last_Name,Email_new Address
+4444444444,James Davis,29,James Davis,29,james@example.com,4444444^^4,Unknown,567 Walnut St,9^^01,Male,Seattle,,"567 Walnut St, Seattle, 98101",JAMES,Davis,james@example.com
+2121212121,Matthew Martinez,29,Matthew Martinez,29,matthew@example.com,2121212^^1,Unknown,901 Elm St,7^^01,Male,Austin,,"901 Elm St, Austin, 73301",MATTHEW,Martinez,matthew@example.com
+1212121212,Mia Johnson,29,Mia Johnson,29,mia@example.com,1212121^^2,LA,901 Pine St,9^^01,Female,Los,Angeles,"901 Pine St, Los Angeles, 90001",MIA,Johnson,mia@example.com
+1111111111,Emily Williams,28,Emily Williams,28,emily@example.com,1111111^^1,Unknown,567 Pine St,7^^02,Female,Houston,,"567 Pine St, Houston, 77002",EMILY,Williams,emily@example.com
+2626262626,Natalie Brown,28,Natalie Brown,28,natalie@example.com,2626262^^6,Unknown,456 Oak St,7^^02,Female,Houston,,"456 Oak St, Houston, 77002",NATALIE,Brown,natalie@example.com
+1818181818,Charlotte Smith,27,Charlotte Smith,27,charlotte@example.com,1818181^^8,Unknown,789 Cedar St,9^^01,Female,San,Francisco,"789 Cedar St, San Francisco, 94101",CHARLOTTE,Smith,charlotte@example.com
+7777777777,Sophia Wilson,27,Sophia Wilson,27,sophia@example.com,7777777^^7,Unknown,456 Cedar St,8^^01,Female,Denver,,"456 Cedar St, Denver, 80201",SOPHIA,Wilson,sophia@example.com
+1414141414,Abigail Brown Wilson,26,Abigail Brown Wilson,26,abigail@example.com,1414141^^4,Unknown,567 Cedar St,7^^02,Female,Houston,,"567 Cedar St, Houston, 77002",ABIGAIL BROWN,Wilson,abigail@example.com
+2424242424,Grace Sofia Davis,26,Grace Sofia Davis,26,grace@example.com,2424242^^4,LA,789 Pine St,9^^01,Female,Los,Angeles,"789 Pine St, Los Angeles, 90001",GRACE SOFIA,Davis,grace@example.com
+5555555555,Olivia Taylor,26,Olivia Taylor,26,olivia@example.com,XXXXXXX^^5,Unknown,789 Oak St,9^^01,Female,San,Francisco,"789 Oak St, San Francisco, 94101",OLIVIA,Taylor,olivia@example.com
+9876543210,Jane Smith,25,Jane Smith,25,janesmith@example.com,9876543^^0,LA,456 Elm St,9^^01,Female,Los,Angeles,"456 Elm St, Los Angeles, 90001",JANE,Smith,janesmith@example.com
+2020202020,Sofia Anderson,25,Sofia Anderson,25,sofia@example.com,2020202^^0,Unknown,567 Walnut St,8^^01,Female,Denver,,"567 Walnut St, Denver, 80201",SOFIA,Anderson,sofia@example.com

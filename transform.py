@@ -176,6 +176,80 @@ def check_not_blank_transform(df, columns):
 
     return df
 
+
+def check_data_transform(df, checks):
+    if not isinstance(checks, list):
+        raise ValueError("Invalid checks. 'checks' must be a list.")
+
+    for check in checks:
+        check_type = check.get('type')
+        if check_type is None:
+            raise ValueError("Invalid check. 'type' parameter is missing.")
+
+        if check_type == 'length':
+            column = check.get('column')
+            max_length = check.get('max_length')
+
+            if column not in df.columns:
+                raise ValueError(f"Invalid column '{column}' specified for length check")
+
+            invalid_values = df[df[column].astype(str).str.len() > max_length][column]
+            if len(invalid_values) > 0:
+                raise ValueError(f"Text values in column '{column}' exceed the maximum length of {max_length}. Invalid values are [{', '.join(invalid_values.astype(str))}]")
+
+        elif check_type == 'values':
+            column = check.get('column')
+            valid_values = check.get('valid_values')
+
+            if column not in df.columns:
+                raise ValueError(f"Invalid column '{column}' specified for values check")
+
+            invalid_values = df[~df[column].isin(valid_values)][column]
+            if len(invalid_values) > 0:
+                raise ValueError(f"Invalid values found in column '{column}': {', '.join(invalid_values.astype(str))}")
+
+        elif check_type == 'not_blank':
+            columns = check.get('columns')
+
+            invalid_columns = [col for col in columns if col not in df.columns]
+            if invalid_columns:
+                raise ValueError(f"Invalid columns specified for not_blank check: {', '.join(invalid_columns)}")
+
+            for column in columns:
+                if df[column].isnull().any() or (df[column] == '').any():
+                    raise ValueError(f"Blank values found in column '{column}'")
+
+        elif check_type == 'data_type':
+            mapping = check.get('mapping')
+
+            invalid_columns = [col for col in mapping if col not in df.columns]
+            if invalid_columns:
+                raise ValueError(f"Invalid columns specified for data_type check: {', '.join(invalid_columns)}")
+
+            for column in mapping:
+                expected_data_type = mapping[column]
+                if df[column].dtype != expected_data_type:
+                    raise ValueError(
+                        f"Invalid data type in column '{column}'. Expected data type: {expected_data_type}, found: {df[column].dtype}"
+                    )
+
+        elif check_type == 'range':
+            column = check.get('column')
+            min_value = check.get('min_value')
+            max_value = check.get('max_value')
+
+            if column not in df.columns:
+                raise ValueError(f"Invalid column '{column}' specified for range check")
+
+            invalid_values = df[(df[column] < min_value) | (df[column] > max_value)][column]
+            if len(invalid_values) > 0:
+                raise ValueError(f"Values in column '{column}' fall outside the range [{min_value}, {max_value}]. Invalid values are [{', '.join(invalid_values.astype(str))}]")
+
+        else:
+            raise ValueError(f"Invalid check type: {check_type}")
+
+    return df
+
 def drop_transform(df, columns):
     invalid_columns = [col for col in columns if col not in df.columns]
     if invalid_columns:
@@ -219,5 +293,9 @@ def apply_transformations(df, transformation_definitions):
             df = check_data_type_transform(df, transformation['mapping'])
         elif transformation_type == 'check_not_blank':
             df = check_not_blank_transform(df, transformation['columns'])
+        elif transformation_type == 'checks':
+            df = check_data_transform(df, transformation)
+
+            
 
     return df
