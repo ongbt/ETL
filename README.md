@@ -17,6 +17,7 @@ This user guide provides an overview of the data transformation program and expl
     - [check_not_blank](#check_not_blank)
     - [checks](#checks-combined)
   - [Transformations](#transformations)
+    - [create](#create)
     - [duplicate](#duplicate)
     - [split](#split)
     - [split_pair](#split_pair)
