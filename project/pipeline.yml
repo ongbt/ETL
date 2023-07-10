@@ -6,8 +6,150 @@
 
 - process:
     input_file: merged.csv
-    transformation_file: transformations.yml
+    transformation_file:
     output_file: processed.csv
+    transformations:
+      - duplicate:
+          mapping:
+            Name: Name_new
+            Age: Age_new
+            Email: Email_new
+            Phone: Phone_new
+            City: City_new
+            Address: Address_new
+            ZipCode: ZipCode_new
+            Sex: Sex_new
+
+- process:
+    input_file: processed.csv
+    transformation_file: transformations.yml
+    output_file: processed1.csv
+    transformations:
+      - check_data_type:
+          mapping:
+            Name: object
+            Age: int64
+            Email: object
+            City: object
+            Address: object
+            Sex: object
+
+      - check_not_blank:
+          columns: [Name, Age, Phone, City, Address, ZipCode, Sex]
+
+      - checks:
+          - type: length
+            column: Name
+            max_length: 100
+          - type: values
+            column: Sex
+            valid_values: [M, F]
+          - type: not_blank
+            columns: [Name]
+          - type: range
+            column: Age
+            min_value: 18
+            max_value: 39
+
+      - duplicate:
+          mapping:
+            Name: Name_new
+            Age: Age_new
+            Email: Email_new
+            Phone: Phone_new
+            City: City_new
+            Address: Address_new
+            ZipCode: ZipCode_new
+            Sex: Sex_new
+
+      - split:
+          column: City
+          separator: " "
+
+      - replace:
+          column: Phone_new
+          match: "555"
+          replacement: "XXX"
+
+      - replace_text:
+          column: ZipCode_new
+          start_position: 1
+          end_position: 2
+          replacement: "^"
+          start: true
+
+      - replace_characters:
+          column: ZipCode_new
+          num_characters: 2
+          replacement: "*"
+          first: false
+
+      - replace_text:
+          column: Phone_new
+          start_position: 1
+          end_position: 2
+          replacement: "^"
+          start: false
+
+      - merge:
+          columns: [Address, City, ZipCode]
+          separator: ", "
+          output_column: "Address City ZipCode"
+
+      - filter_records:
+          condition: "(Age <= 30) and (ZipCode >= 50000)"
+
+      - map_value:
+          column: City_new
+          default_value: Unknown
+          mapping:
+            New York: NY
+            Los Angeles: LA
+            Chicago: CHI
+
+      - map_value:
+          column: Sex_new
+          default_value: Unknown
+          mapping:
+            F: Female
+            M: Male
+            O: Others
+
+      - split_pair:
+          column: Name
+          separator: " "
+          first: false
+
+      - convert_case:
+          mapping:
+            Name_1: uppercase
+            Name_2: titlecase
+
+      - rename:
+          mapping:
+            Name_2: Last_Name
+            Name_1: First_Name
+
+      - sort:
+          mapping:
+            Age: false
+            Name: true
+
+      - duplicate:
+          mapping:
+            Email_new: Email_new Address
+
+      - drop:
+          columns: [Email, Phone, City, Address, ZipCode, Sex]
+
+      - rename:
+          mapping:
+            Phone_new: Phone
+            City_new: City
+            Address City ZipCode: Address
+            ZipCode_new: ZipCode
+            Sex_new: Sex
+            Email_new: Email
 
 - split:
     input_file: processed.csv

@@ -24,16 +24,28 @@ def split(input_file, output_definitions):
     except (FileNotFoundError, KeyError) as e:
         print(f"Error occurred during split: {str(e)}")
 
-def process(input_file, transformation_file, output_file):
+def process(input_file, output_file, transformation_file, transformation_definitions):
+
+
     try:
+        transformation_type = 'inline transformations'
+        if (transformation_file is not None):
+            transformation_definitions = parse_transformations_file(transformation_file)
+            transformation_type = transformation_file
+
         df = pd.read_csv(input_file)
-        transformation_definitions = parse_transformations_file(transformation_file)
         df = apply_transformations(df, transformation_definitions)
+
         df.to_csv(output_file, index=False)
-        print(f"Process CSV file '{input_file}' using '{transformation_file}' into '{output_file}' successfully.")
+        
+       
+        print(f"Process CSV file '{input_file}' using '{transformation_type}' into '{output_file}' successfully.")
+        
     except (FileNotFoundError, KeyError) as e:
         print(f"Error occurred during split: {str(e)}")
 
+
+ 
 
 def run_pipeline(pipeline_definitions):
     try:
@@ -57,8 +69,9 @@ def run_pipeline(pipeline_definitions):
             elif pipeline_definition_type == 'process':
                 process(
                     pipeline_definition['input_file'],
+                    pipeline_definition['output_file'],
                     pipeline_definition['transformation_file'],
-                    pipeline_definition['output_file']
+                    pipeline_definition['transformations']
                 )
         # Perform additional processing on input_file if required 
     except (FileNotFoundError, KeyError, yaml.YAMLError) as e:
