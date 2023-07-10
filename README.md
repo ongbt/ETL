@@ -1,6 +1,35 @@
  
 
 This user guide provides an overview of the data transformation program and explains how to use each transformation function. The program is designed to perform various data transformations on a Pandas DataFrame.
+
+# Table of Contents 
+
+- [Introduction](#introduction)
+- [Pipeline](#pipeline)
+  - [Example](#example)
+- [Pipeline Definitions](#pipeline-definitions)
+- [merge file](#merge-file)
+- [split file](#split-file)
+- [process file](#process-file)
+- [Processing](#processing)
+  - [check_data_type](#check_data_type)
+  - [check_not_blank](#check_not_blank)
+  - [checks](#checks)
+- [Transformations](#transformations)
+  - [duplicate](#duplicate)
+  - [split](#split)
+  - [split_pair](#split_pair)
+  - [replace](#replace)
+  - [replace_text](#replace_text)
+  - [merge](#merge)
+  - [drop](#drop)
+  - [filter_records](#filter_records)
+  - [map_value](#map_value)
+  - [convert_case](#convert_case)
+  - [rename](#rename)
+  - [sort](#sort)
+
+You can use these links to navigate directly to each section in your user guide.
 # Introduction
 ChatGPT: https://chat.openai.com/?model=text-davinci-002-render-sha
 
@@ -21,7 +50,7 @@ The data transformation program provides a collection of functions to manipulate
 - process:
     input_file: merged.csv
     transformation_file: transformations.yml
-    transformations: see [Processing](#processing)
+    transformations: 
       ...
     output_file: processed.csv
 
@@ -97,12 +126,15 @@ Processes a file using transformations defined in a YAML file.
 - process:
     input_file: <input_file>
     transformation_file: <transformation_file>
+    transformations: 
+      ...
     output_file:  <output_file> 
 ```
 #### Parameters:
 - input_file: Path to the input file.
 - transformation_file: Path to the YAML file containing transformation definitions.
 - output_file: Path to the output processed file.
+- transformations: see [Processing](#processing)
 
 #### Example:
 ```
