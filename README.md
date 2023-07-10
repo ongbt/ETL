@@ -21,7 +21,7 @@ The data transformation program provides a collection of functions to manipulate
 - process:
     input_file: merged.csv
     transformation_file: transformations.yml
-    transformats: 
+    transformations: see [Processing](#processing)
       ...
     output_file: processed.csv
 
