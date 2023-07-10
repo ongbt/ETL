@@ -27,6 +27,11 @@
       min_value: 18
       max_value: 39
 
+- create:
+    column: Income
+    default_value: 3000
+    data_type: int64
+
 - duplicate:
     mapping:
       Name: Name_new

@@ -258,6 +258,18 @@ def drop_transform(df, columns):
     return df
 
 
+def create_transform(df, column, data_type, default_value=None):
+    if column in df.columns:
+        raise ValueError(f"Column '{column}' already exists in the DataFrame")
+
+    if default_value is not None:
+        df[column] = default_value
+    else:
+        df[column] = pd.Series(dtype=data_type)
+
+    return df
+
+
 def apply_transformations(df, transformation_definitions):
     for transformation_definition in transformation_definitions:
         transformation_type = list(transformation_definition.keys())[0]
@@ -289,6 +301,8 @@ def apply_transformations(df, transformation_definitions):
             df = duplicate_transform(df, transformation['mapping'])
         elif transformation_type == 'sort':
             df = sort_transform(df, transformation['mapping'])
+        elif transformation_type == 'create':
+            df = create_transform(df, transformation['column'], transformation['data_type'], transformation['default_value'])
         elif transformation_type == 'check_data_type':
             df = check_data_type_transform(df, transformation['mapping'])
         elif transformation_type == 'check_not_blank':
