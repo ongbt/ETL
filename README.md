@@ -21,6 +21,8 @@ The data transformation program provides a collection of functions to manipulate
 - process:
     input_file: merged.csv
     transformation_file: transformations.yml
+    transformats: 
+      ...
     output_file: processed.csv
 
 - split:
@@ -156,6 +158,76 @@ This function checks if specified columns have any blank values (NaN or empty st
 ```
 - check_not_blank:
     columns: [Name, Age, Phone, City, Address, ZipCode, Sex]
+```
+
+---
+### checks
+ 
+
+
+#### Syntax:
+```
+- checks:
+    - type: length
+      column: <column>
+      max_length: <max_length>
+    - type: values
+      column: <column>
+      valid_values: [<value>, >value>, ...]
+    - type: not_blank
+      columns: [<column>, <column>, ...]
+    - type: range
+      column: <column>
+      min_value: <min_value>
+      max_value: <max_value>
+```
+#### Parameters:
+- type: length | values | not_blank | range
+
+#### Example:
+```
+- checks:
+    - type: length
+      column: Name
+      max_length: 100
+    - type: values
+      column: Sex
+      valid_values:
+        - M
+        - F
+    - type: not_blank
+      columns:
+        - Name
+    - type: range
+      column: Age
+      min_value: 18
+      max_value: 39
+```
+
+---
+### create
+ 
+
+#### Syntax:
+```
+- create:
+    column: <new_column_name>
+    data_type: <data_type>
+    default_value: <default_value>
+
+```
+#### Parameters:
+- column: The name of the new column to create.
+- data_type: The desired data type for the new column.
+- default_value (optional): The default value to assign to the new column. If not provided, the column will be left as blank.
+
+#### Example:
+```
+- create:
+    column: Income
+    data_type: int64
+    default_value: 3000
+
 ```
 ---
 
