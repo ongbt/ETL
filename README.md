@@ -12,22 +12,23 @@ This user guide provides an overview of the data transformation program and expl
     - [split file](#split-file)
     - [process file](#process-file)
 - [Processing](#processing)
-  - [check_data_type](#check_data_type)
-  - [check_not_blank](#check_not_blank)
-  - [checks](#checks)
-- [Transformations](#transformations)
-  - [duplicate](#duplicate)
-  - [split](#split)
-  - [split_pair](#split_pair)
-  - [replace](#replace)
-  - [replace_text](#replace_text)
-  - [merge](#merge)
-  - [drop](#drop)
-  - [filter_records](#filter_records)
-  - [map_value](#map_value)
-  - [convert_case](#convert_case)
-  - [rename](#rename)
-  - [sort](#sort)
+  - [Checks](#checks)
+    - [check_data_type](#check_data_type)
+    - [check_not_blank](#check_not_blank)
+    - [checks](#checks-combined)
+  - [Transformations](#transformations)
+    - [duplicate](#duplicate)
+    - [split](#split)
+    - [split_pair](#split_pair)
+    - [replace](#replace)
+    - [replace_text](#replace_text)
+    - [merge](#merge)
+    - [drop](#drop)
+    - [filter_records](#filter_records)
+    - [map_value](#map_value)
+    - [convert_case](#convert_case)
+    - [rename](#rename)
+    - [sort](#sort)
 
 You can use these links to navigate directly to each section in your user guide.
 # Introduction
@@ -193,7 +194,7 @@ This function checks if specified columns have any blank values (NaN or empty st
 ```
 
 ---
-### checks
+### checks (combined)
  
 
 
