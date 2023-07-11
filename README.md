@@ -239,6 +239,10 @@ This function checks if specified columns have any blank values (NaN or empty st
 ```
 
 ---
+
+## Transformations
+
+---
 ### create
  
 
@@ -263,9 +267,6 @@ This function checks if specified columns have any blank values (NaN or empty st
     default_value: 3000
 
 ```
----
-
-## Transformations
 ### duplicate
 This function copies the values from specified columns to new columns with different names.
 

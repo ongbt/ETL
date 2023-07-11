@@ -1,30 +1,13 @@
 SSN,Name,Age,Email,ZipCode,Address
-9876543210,Jane Smith,25,janesmith@example.com,90001,456 Elm St
-5555555551,David Johnson,35,,60601,789 Oak St
-1111111111,Emily Williams,28,emily@example.com,77002,567 Pine St
-2222222222,Michael Brown,33,michael@example.com,85001,901 Cedar St
-2222222222,Michael Brown,33,michael@example.com,30301,234 Oak St
-2222222222,Ava Sofia Thomas,32,ava@example.com,85001,901 Cedar St
-2222222222,Ava Sofia Thomas,32,ava@example.com,30301,234 Oak St
-3333333333,Emma Lee Thompson,31,emmalee@example.com,2101,345 Maple St
-4444444444,James Davis,29,james@example.com,98101,567 Walnut St
-5555555555,Olivia Taylor,26,olivia@example.com,94101,789 Oak St
-6666666666,William Miller,37,william@example.com,75201,123 Pine St
-7777777777,Sophia Wilson,27,sophia@example.com,80201,456 Cedar St
-8888888888,Benjamin Anderson,32,benjamin@example.com,73301,789 Elm St
-9999999999,Isabella Brown Martinez,30,isabella@example.com,30301,345 Oak St
-1010101010,Joseph Thomas,24,joseph@example.com,10001,567 Maple St
-1212121212,Mia Johnson,29,mia@example.com,90001,901 Pine St
-1313131313,Jacob Davis,35,jacob@example.com,60601,234 Elm St
-1414141414,Abigail Brown Wilson,26,abigail@example.com,77002,567 Cedar St
-1515151515,Ethan Brown,31,ethan@example.com,85001,890 Oak St
-1616161616,Elizabeth Taylor,28,elizabeth@example.com,2101,123 Cedar St
-1717171717,Alexander Benjamin Miller,33,alexander@example.com,98101,456 Pine St
-1818181818,Charlotte Smith,27,charlotte@example.com,94101,789 Cedar St
-1919191919,Daniel Thompson,37,daniel@example.com,75201,345 Oak St
-2020202020,Sofia Anderson,25,sofia@example.com,80201,567 Walnut St
-2121212121,Matthew Martinez,29,matthew@example.com,73301,901 Elm St
-2323232323,Andrew Johnson,30,andreww@example.com,10001,456 Maple St
-2424242424,Grace Sofia Davis,26,grace@example.com,90001,789 Pine St
-2525252525,William Wilson,35,,60601,123 Cedar St
-2626262626,Natalie Brown,28,natalie@example.com,77002,456 Oak St
+4444444444,James Davis,29,james@example.com,9^^01,"567 Walnut St, Seattle, 98101"
+2121212121,Matthew Martinez,29,matthew@example.com,7^^01,"901 Elm St, Austin, 73301"
+1212121212,Mia Johnson,29,mia@example.com,9^^01,"901 Pine St, Los Angeles, 90001"
+1111111111,Emily Williams,28,emily@example.com,7^^02,"567 Pine St, Houston, 77002"
+2626262626,Natalie Brown,28,natalie@example.com,7^^02,"456 Oak St, Houston, 77002"
+1818181818,Charlotte Smith,27,charlotte@example.com,9^^01,"789 Cedar St, San Francisco, 94101"
+7777777777,Sophia Wilson,27,sophia@example.com,8^^01,"456 Cedar St, Denver, 80201"
+1414141414,Abigail Brown Wilson,26,abigail@example.com,7^^02,"567 Cedar St, Houston, 77002"
+2424242424,Grace Sofia Davis,26,grace@example.com,9^^01,"789 Pine St, Los Angeles, 90001"
+5555555555,Olivia Taylor,26,olivia@example.com,9^^01,"789 Oak St, San Francisco, 94101"
+9876543210,Jane Smith,25,janesmith@example.com,9^^01,"456 Elm St, Los Angeles, 90001"
+2020202020,Sofia Anderson,25,sofia@example.com,8^^01,"567 Walnut St, Denver, 80201"

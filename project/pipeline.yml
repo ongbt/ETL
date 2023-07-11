@@ -152,7 +152,7 @@
             Email_new: Email
 
 - split:
-    input_file: processed.csv
+    input_file: processed1.csv
     output_definitions:
       split1.csv: [SSN, Name, Age, Email, ZipCode, Address]
       split2.csv: [SSN, Name, Phone, Sex]
